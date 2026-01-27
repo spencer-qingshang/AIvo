@@ -58,10 +58,10 @@ This skill acts as your personal English learning assistant for the **AIvo** pro
 - `python scripts/log_error.py --content "Misspelled 'definitely' as 'definatly'"`
 
 ## 🧠 Teaching Strategy (User Preferences)
-- **NO Translation Options:** Do NOT use Chinese translations as multiple-choice options (User has subtitles).
-- **Focus:** Grammar logic, structural analysis, and synonym replacement in English.
+- **NO Meaning/Context/Tone:** Do NOT ask about what a sentence "means", the "emotion" of a character, or "subtext".
+- **PURE Grammar Focus:** Only ask about syntactic structures, part of speech (词性), tense rules (时态规则), sentence patterns (句式), and morphological rules (构词/变形).
 - **Flow:** One sentence at a time.
-- **Feedback:** If analysis is wrong, log it to `练习反馈日志.md`.
+- **Feedback:** Log technical grammatical errors to `练习反馈日志.md`.
 
 ## Error Handling
 - Checks if files already exist (prevents overwrite).

@@ -57,6 +57,12 @@ This skill acts as your personal English learning assistant for the **AIvo** pro
 - `python scripts/init_lesson.py --season 01 --episode 02`
 - `python scripts/log_error.py --content "Misspelled 'definitely' as 'definatly'"`
 
+## 🧠 Teaching Strategy (User Preferences)
+- **NO Translation Options:** Do NOT use Chinese translations as multiple-choice options (User has subtitles).
+- **Focus:** Grammar logic, structural analysis, and synonym replacement in English.
+- **Flow:** One sentence at a time.
+- **Feedback:** If analysis is wrong, log it to `练习反馈日志.md`.
+
 ## Error Handling
 - Checks if files already exist (prevents overwrite).
 - Validates season/episode format.

@@ -26,13 +26,22 @@ This skill acts as your personal English learning assistant for the **AIvo** pro
     - Updates `每日学习进度表.md` with new rows.
 
 ### 2. Log Learning Error
-**Goal:** Quickly record a blind spot during practice without switching contexts.
-**Trigger:** "Log error [content]"
+... (此处省略已有内容)
+
+### 3. Record Key Vocabulary
+**Goal:** Automatically archive a key word into the lesson's vocabulary table.
+**Trigger:** "Add [word] to my vocabulary list", "Note down [word] with meaning [meaning]".
 **Actions:**
-1.  Appends the error to the current day's section in `练习反馈日志.md`.
-2.  Formats it as a checklist item `[ ]` so it can be reviewed later.
+1.  Identifies the current episode code (e.g., S01E01).
+2.  Calls `scripts/add_vocab.py` with word, phonetic, and meaning.
+3.  Ensures the row is correctly inserted into the Markdown table.
 
 ## Scripts
+...
+### `add_vocab.py`
+- **Path:** `scripts/add_vocab.py`
+- **Purpose:** Adds a row to the vocabulary table in the lesson note.
+- **Parameters:** `--se`, `--word`, `--phonetic`, `--meaning`, `--context`
 
 ### `init_lesson.py`
 - **Path:** `scripts/init_lesson.py`

@@ -1,0 +1,21 @@
+{
+  "name": "english-study-helper",
+  "owner": {
+    "name": "AIvo User",
+    "email": "local@user"
+  },
+  "metadata": {
+    "description": "Automates English learning workflows for Modern Family and PETS-3: initializes lesson files, generates vocabulary quizzes, and logs learning errors.",
+    "version": "1.0.0",
+    "created": "2026-01-27"
+  },
+  "plugins": [
+    {
+      "name": "english-study-helper",
+      "description": "Automates English learning workflows for Modern Family and PETS-3: initializes lesson files, generates vocabulary quizzes, and logs learning errors.",
+      "source": "./",
+      "strict": false,
+      "skills": ["./"]
+    }
+  ]
+}

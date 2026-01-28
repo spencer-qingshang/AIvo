@@ -9,5 +9,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Refactor English learning notes structure for better retrieval and automation.**
+- [~] **Track: Refactor English learning notes structure for better retrieval and automation.**
   *Link: [./tracks/vault_refactor_20260128/](./tracks/vault_refactor_20260128/)*

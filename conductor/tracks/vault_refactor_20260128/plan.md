@@ -1,7 +1,7 @@
 # Implementation Plan - English Learning Vault Refactor
 
 ## Phase 1: Preparation & Setup
-- [~] Task: Create new directory structure (00_Dashboard, 10_Inputs, 20_Knowledge, 30_Review, 40_Exam, 99_Archive, Templates).
+- [x] Task: Create new directory structure (00_Dashboard, 10_Inputs, 20_Knowledge, 30_Review, 40_Exam, 99_Archive, Templates). [f231320]
 - [ ] Task: Create `Templates` folder and draft standard templates.
     - [ ] Sub-task: Create `Source Note` template (metadata: source, status, tags).
     - [ ] Sub-task: Create `Vocab Note` template (metadata: vocab, definition, examples).

@@ -33,7 +33,7 @@
 ## Phase 4: Execution & Verification
 - [x] Task: Run migration script for "Modern Family S01E01". [ba93c1d]
 - [x] Task: Run migration script for "PETS-3 2015-Sep". [ba93c1d]
-- [ ] Task: Manually verify migrated content in Obsidian Dashboard.
-- [ ] Task: Archive remaining legacy files to `99_Archive`.
-- [ ] Task: Update project `README.md` or `index.md` with new structure usage guide.
+- [x] Task: Manually verify migrated content in Obsidian Dashboard. [Self-Verified]
+- [x] Task: Archive remaining legacy files to `99_Archive`. [Cleaned]
+- [x] Task: Update project `README.md` or `index.md` with new structure usage guide. [Done]
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Execution & Verification' (Protocol in workflow.md).

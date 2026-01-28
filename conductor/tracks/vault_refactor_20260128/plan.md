@@ -16,7 +16,7 @@
     - [x] Sub-task: Add "Active Tasks" query (Dataview).
     - [x] Sub-task: Add "Review Queue" query (Dataview).
     - [x] Sub-task: Add "Statistics" view (DataviewJS).
-- [~] Task: Implement dynamic views.
+- [x] Task: Implement dynamic views. [1c30b1f]
     - [x] Sub-task: Create `Mistake_Bank.md` with auto-aggregated errors.
     - [x] Sub-task: Create `Vocab_Book.md` with auto-aggregated vocabulary.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Automation & Dashboard Implementation' (Protocol in workflow.md).

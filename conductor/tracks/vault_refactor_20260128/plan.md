@@ -1,13 +1,13 @@
 # Implementation Plan - English Learning Vault Refactor
 
 ## Phase 1: Preparation & Setup
-- [x] Task: Create new directory structure (00_Dashboard, 10_Inputs, 20_Knowledge, 30_Review, 40_Exam, 99_Archive, Templates). [f231320]
-- [x] Task: Create `Templates` folder and draft standard templates. [8390732]
-    - [x] Sub-task: Create `Source Note` template (metadata: source, status, tags). [657076c]
-    - [x] Sub-task: Create `Vocab Note` template (metadata: vocab, definition, examples). [8e56d1b]
-    - [x] Sub-task: Create `Grammar Note` template (metadata: grammar, difficulty). [db2165d]
-    - [x] Sub-task: Create `Error Log` template (metadata: error, reason, related_source). [7dbe6e5]
-    - [x] Sub-task: Create `Daily Review` template (metadata: review, date, score). [8390732]
+- [x] Task: Create new directory structure (00=仪表盘, 10=学习素材, 20=知识库, 30=复盘, 40=考试, 99=归档, 模板). [9da8b2c]
+- [x] Task: Create `模板` folder and draft standard templates. [9da8b2c]
+    - [x] Sub-task: Create `素材模板` template (metadata: source, status, tags).
+    - [x] Sub-task: Create `单词模板` template (metadata: vocab, definition, examples).
+    - [x] Sub-task: Create `语法模板` template (metadata: grammar, difficulty).
+    - [x] Sub-task: Create `错题模板` template (metadata: error, reason, related_source).
+    - [x] Sub-task: Create `复盘模板` template (metadata: review, date, score).
 - [x] Task: Install/Enable Dataview plugin (User verification required). [User Verified]
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Setup' (Protocol in workflow.md).
 

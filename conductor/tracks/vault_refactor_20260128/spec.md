@@ -7,21 +7,22 @@
 
 ### 2.1 目录与层级重构
 - **目标：** 扁平化目录结构，规范命名，从“文件夹分类”转向“标签+属性分类”。
-- **新结构提案：**
-  - `00_仪表盘 (Dashboard)`：中央入口。
-  - `10_学习源 (Inputs)`：原始素材（如摩登家庭剧本、真题文章），按 ID 组织。
-  - `20_知识点 (Knowledge)`：原子化笔记（单词 Vocab、语法规则 Grammar）。
-  - `30_复盘与输出 (Review)`：每日日志、错题记录 (Mistakes)、练习输出。
-  - `40_考试专题 (Exam)`：PETS-3、自考英语大纲及模拟题。
-  - `99_归档 (Archive)`：旧版笔记。
+- **新结构提案 (位于 C4=归档资料/4.1=学习类/4.1.1=英语学习/)：**
+  - `00=仪表盘`：中央入口。
+  - `10=学习素材`：原始素材（如摩登家庭剧本、真题文章），按 ID 组织。
+  - `20=知识库`：原子化笔记（单词、语法规则）。
+  - `30=复盘`：每日日志、错题记录、练习输出。
+  - `40=考试`：PETS-3、自考英语大纲及模拟题。
+  - `99=归档`：旧版笔记。
+  - `模板`：存放标准 Markdown 模板。
 
 ### 2.2 标准化模板 (Templates)
-- 在 `Templates/` 文件夹下创建以下标准 Markdown 模板：
-  - **素材模板 (Source Template)**：用于剧集、文章。属性包含：`type: source`, `status`, `tags`, `level`。
-  - **单词模板 (Vocab Template)**：用于单个单词。属性包含：`type: vocab`, `definitions`, `examples`, `mastery`（掌握度）。
-  - **语法模板 (Grammar Template)**：用于语法点。属性包含：`type: grammar`, `difficulty`。
-  - **复盘模板 (Review Template)**：用于每日总结。属性包含：`type: review`, `date`, `rating`。
-  - **错题模板 (Error Template)**：用于记录特定错误。属性包含：`type: error`, `related_source`, `reason`。
+- 在 `模板/` 文件夹下创建以下标准 Markdown 模板：
+  - **素材模板**：用于剧集、文章。属性包含：`type: source`, `status`, `tags`, `level`。
+  - **单词模板**：用于单个单词。属性包含：`type: vocab`, `definitions`, `examples`, `mastery`（掌握度）。
+  - **语法模板**：用于语法点。属性包含：`type: grammar`, `difficulty`。
+  - **复盘模板**：用于每日总结。属性包含：`type: review`, `date`, `rating`。
+  - **错题模板**：用于记录特定错误。属性包含：`type: error`, `related_source`, `reason`。
 
 ### 2.3 自动化与仪表盘 (Dataview)
 - **主仪表盘 (`英语学习主页.md`)：**

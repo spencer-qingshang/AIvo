@@ -11,7 +11,7 @@
 - [x] Task: Install/Enable Dataview plugin (User verification required). [User Verified]
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Setup' (Protocol in workflow.md). [194e378]
 
-## Phase 2: Automation & Dashboard Implementation
+## Phase 2: Automation & Dashboard Implementation [checkpoint: 754be95]
 - [x] Task: Implement `English_Home.md` (Dashboard). [020da51]
     - [x] Sub-task: Add "Active Tasks" query (Dataview).
     - [x] Sub-task: Add "Review Queue" query (Dataview).
@@ -19,7 +19,7 @@
 - [x] Task: Implement dynamic views. [1c30b1f]
     - [x] Sub-task: Create `Mistake_Bank.md` with auto-aggregated errors.
     - [x] Sub-task: Create `Vocab_Book.md` with auto-aggregated vocabulary.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Automation & Dashboard Implementation' (Protocol in workflow.md).
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Automation & Dashboard Implementation' (Protocol in workflow.md). [754be95]
 
 ## Phase 3: Migration Script Development (Python)
 - [ ] Task: Analyze source file structure (`重点词汇与答疑笔记.md`, `每日学习进度表.md`).

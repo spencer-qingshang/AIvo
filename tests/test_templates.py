@@ -43,5 +43,15 @@ class TestTemplates(unittest.TestCase):
             self.assertIn("reason: ", content)
             self.assertIn("related_source: ", content)
 
+    def test_daily_review_template_content(self):
+        template_path = "Templates/Daily Review.md"
+        self.assertTrue(os.path.exists(template_path), "Templates/Daily Review.md should exist")
+        
+        with open(template_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            self.assertIn("type: review", content)
+            self.assertIn("date: ", content)
+            self.assertIn("score: ", content)
+
 if __name__ == '__main__':
     unittest.main()

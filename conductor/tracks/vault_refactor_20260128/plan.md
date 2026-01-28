@@ -6,8 +6,8 @@
     - [x] Sub-task: Create `Source Note` template (metadata: source, status, tags). [657076c]
     - [x] Sub-task: Create `Vocab Note` template (metadata: vocab, definition, examples). [8e56d1b]
     - [x] Sub-task: Create `Grammar Note` template (metadata: grammar, difficulty). [db2165d]
-    - [~] Sub-task: Create `Error Log` template (metadata: error, reason, related_source).
-    - [ ] Sub-task: Create `Daily Review` template (metadata: review, date, score).
+    - [x] Sub-task: Create `Error Log` template (metadata: error, reason, related_source). [7dbe6e5]
+    - [~] Sub-task: Create `Daily Review` template (metadata: review, date, score).
 - [ ] Task: Install/Enable Dataview plugin (User verification required).
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Setup' (Protocol in workflow.md).
 

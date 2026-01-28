@@ -2,9 +2,9 @@
 
 #### **第一阶段：理论知识库补完 (Phase 1: Theory Completion)**
 - [x] **任务 1**: 在 `项目4 IPv6的园区网络.md` 中回答“IPv6地址基本配置”相关问题 (识记、领会、应用)。 [68d1c53]
-- [~] **任务 2**: 在 `项目4 IPv6的园区网络.md` 中回答“IPv6静态路由及默认路由”相关问题。
-- [ ] **任务 3**: 在 `项目4 IPv6的园区网络.md` 中回答“动态路由RIPng”及“动态路由OSPFv3”相关问题。
-- [ ] **任务 4**: Conductor - User Manual Verification '理论知识库补完' (Protocol in workflow.md)
+- [x] **任务 2**: 在 `项目4 IPv6的园区网络.md` 中回答“IPv6静态路由及默认路由”相关问题。 [09da365]
+- [x] **任务 3**: 在 `项目4 IPv6的园区网络.md` 中回答“动态路由RIPng”及“动态路由OSPFv3”相关问题。 [bb9f244]
+- [~] **任务 4**: Conductor - User Manual Verification '理论知识库补完' (Protocol in workflow.md)
 
 #### **第二阶段：实战手册编写 (Phase 2: Lab Manual Creation)**
 - [ ] **任务 1**: 编写 `项目4_1_IPv6地址基础配置实战.md`。

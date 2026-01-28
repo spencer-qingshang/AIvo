@@ -13,5 +13,16 @@ class TestTemplates(unittest.TestCase):
             self.assertIn("tags: ", content)
             self.assertIn("level: ", content)
 
+    def test_vocab_note_template_content(self):
+        template_path = "Templates/Vocab Note.md"
+        self.assertTrue(os.path.exists(template_path), "Templates/Vocab Note.md should exist")
+        
+        with open(template_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            self.assertIn("type: vocab", content)
+            self.assertIn("definitions: ", content)
+            self.assertIn("examples: ", content)
+            self.assertIn("mastery: ", content)
+
 if __name__ == '__main__':
     unittest.main()

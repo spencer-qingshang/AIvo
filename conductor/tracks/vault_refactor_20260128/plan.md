@@ -36,4 +36,6 @@
 - [x] Task: Manually verify migrated content in Obsidian Dashboard. [Self-Verified]
 - [x] Task: Archive remaining legacy files to `99_Archive`. [Cleaned]
 - [x] Task: Update project `README.md` or `index.md` with new structure usage guide. [Done]
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Execution & Verification' (Protocol in workflow.md).
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Execution & Verification' (Protocol in workflow.md). [70f83b8]
+
+## Phase 4: Execution & Verification [checkpoint: 70f83b8]

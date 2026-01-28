@@ -8,7 +8,7 @@
     - [x] Sub-task: Create `Grammar Note` template (metadata: grammar, difficulty). [db2165d]
     - [x] Sub-task: Create `Error Log` template (metadata: error, reason, related_source). [7dbe6e5]
     - [x] Sub-task: Create `Daily Review` template (metadata: review, date, score). [8390732]
-- [ ] Task: Install/Enable Dataview plugin (User verification required).
+- [x] Task: Install/Enable Dataview plugin (User verification required). [User Verified]
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Setup' (Protocol in workflow.md).
 
 ## Phase 2: Automation & Dashboard Implementation

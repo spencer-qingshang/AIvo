@@ -5,8 +5,8 @@
 - [~] Task: Create `Templates` folder and draft standard templates.
     - [x] Sub-task: Create `Source Note` template (metadata: source, status, tags). [657076c]
     - [x] Sub-task: Create `Vocab Note` template (metadata: vocab, definition, examples). [8e56d1b]
-    - [~] Sub-task: Create `Grammar Note` template (metadata: grammar, difficulty).
-    - [ ] Sub-task: Create `Error Log` template (metadata: error, reason, related_source).
+    - [x] Sub-task: Create `Grammar Note` template (metadata: grammar, difficulty). [db2165d]
+    - [~] Sub-task: Create `Error Log` template (metadata: error, reason, related_source).
     - [ ] Sub-task: Create `Daily Review` template (metadata: review, date, score).
 - [ ] Task: Install/Enable Dataview plugin (User verification required).
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Setup' (Protocol in workflow.md).

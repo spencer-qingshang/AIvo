@@ -33,5 +33,15 @@ class TestTemplates(unittest.TestCase):
             self.assertIn("type: grammar", content)
             self.assertIn("difficulty: ", content)
 
+    def test_error_log_template_content(self):
+        template_path = "Templates/Error Log.md"
+        self.assertTrue(os.path.exists(template_path), "Templates/Error Log.md should exist")
+        
+        with open(template_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            self.assertIn("type: error", content)
+            self.assertIn("reason: ", content)
+            self.assertIn("related_source: ", content)
+
 if __name__ == '__main__':
     unittest.main()

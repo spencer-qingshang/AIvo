@@ -13,9 +13,9 @@
     - [x] 包含：生活化比喻（手动指路）、逐词命令拆解、避坑必杀技。
 - [x] **任务 3**: 编写 `项目4_3_RIPng动态路由实战.md`。 [45b0c55]
     - [x] 包含：生活化比喻（老式广播）、逐词命令拆解、避坑必杀技。
-- [~] **任务 4**: 编写 `项目4_4_OSPFv3动态路由实战.md`。
-    - [ ] 包含：生活化比喻（现代导航）、逐词命令拆解、避坑必杀技。
-- [ ] **任务 5**: Conductor - User Manual Verification '实战手册编写' (Protocol in workflow.md)
+- [x] **任务 4**: 编写 `项目4_4_OSPFv3动态路由实战.md`。 [46a99d6]
+    - [x] 包含：生活化比喻（现代导航）、逐词命令拆解、避坑必杀技。
+- [~] **任务 5**: Conductor - User Manual Verification '实战手册编写' (Protocol in workflow.md)
 
 #### **第三阶段：整体复核与交付 (Phase 3: Final Review)**
 - [ ] **任务 1**: 检查所有文件的链接跳转及 Markdown 语法。

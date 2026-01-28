@@ -2,12 +2,12 @@
 
 ## Phase 1: Preparation & Setup
 - [x] Task: Create new directory structure (00_Dashboard, 10_Inputs, 20_Knowledge, 30_Review, 40_Exam, 99_Archive, Templates). [f231320]
-- [~] Task: Create `Templates` folder and draft standard templates.
+- [x] Task: Create `Templates` folder and draft standard templates. [8390732]
     - [x] Sub-task: Create `Source Note` template (metadata: source, status, tags). [657076c]
     - [x] Sub-task: Create `Vocab Note` template (metadata: vocab, definition, examples). [8e56d1b]
     - [x] Sub-task: Create `Grammar Note` template (metadata: grammar, difficulty). [db2165d]
     - [x] Sub-task: Create `Error Log` template (metadata: error, reason, related_source). [7dbe6e5]
-    - [~] Sub-task: Create `Daily Review` template (metadata: review, date, score).
+    - [x] Sub-task: Create `Daily Review` template (metadata: review, date, score). [8390732]
 - [ ] Task: Install/Enable Dataview plugin (User verification required).
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Setup' (Protocol in workflow.md).
 

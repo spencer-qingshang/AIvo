@@ -21,14 +21,14 @@
     - [x] Sub-task: Create `Vocab_Book.md` with auto-aggregated vocabulary.
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Automation & Dashboard Implementation' (Protocol in workflow.md). [754be95]
 
-## Phase 3: Migration Script Development (Python)
+## Phase 3: Migration Script Development (Python) [checkpoint: abefd45]
 - [x] Task: Analyze source file structure (`重点词汇与答疑笔记.md`, `每日学习进度表.md`). [Analysis Complete]
 - [x] Task: Develop `scripts/migrate_notes.py`. [63a504b]
     - [x] Sub-task: Implement file reader to parse Markdown tables and lists from old notes.
     - [x] Sub-task: Implement content extractor for Vocab and Errors.
     - [x] Sub-task: Implement note generator to create new files based on templates.
     - [x] Sub-task: Dry run script and verify output.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Migration Script Development' (Protocol in workflow.md).
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Migration Script Development' (Protocol in workflow.md). [abefd45]
 
 ## Phase 4: Execution & Verification
 - [ ] Task: Run migration script for "Modern Family S01E01".

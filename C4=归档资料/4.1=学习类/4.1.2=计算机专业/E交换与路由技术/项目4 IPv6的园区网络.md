@@ -53,16 +53,40 @@
 
 3. 使用动态路由RIPng协议实现网络连通
 
-识记：RIPng；RIPng工作机制；RIPng报文格式。
+**识记：RIPng；RIPng工作机制；RIPng报文格式。**
+*   **RIPng**：RIP协议在IPv6环境下的升级版（Next Generation）。
+*   **RIPng工作机制**：
+    1.  **距离矢量**：以跳数作为唯一度量值（最大15跳，16跳不可达）。
+    2.  **UDP传输**：使用UDP端口 521。
+    3.  **组播更新**：目的地为组播地址 `FF02::9`。
+*   **RIPng报文格式**：由命令字段、版本号和多个RTE（路由项实体）组成。
 
-领会：掌握RIPng与RIPv2的区别；能区分RIPng与RIPv2配置命令的区别。
-
-应用：能正确配置RIPng路由实现网络连通。
+**领会：掌握RIPng与RIPv2的区别；能区分RIPng与RIPv2配置命令的区别。**
+*   **主要区别**：
+    *   **地址族**：RIPv2跑在IPv4上，RIPng跑在IPv6上。
+    *   **下一跳**：RIPng使用对端的链路本地地址作为下一跳。
+    *   **启用方式**：RIPv2是在全局`network`宣告，**RIPng是在接口下直接使能**。
+*   **命令区别**：
+    *   RIPng配置：先全局进程 `ripng 1`，再进接口 `ripng 1 enable`。
 
 4. 使用动态路由OSPFv3协议实现网络连通
 
-识记：OSPFv3基本概念；OSPFv3的报文；OSPFv3的LSA类型；OSPFv3的定时器。
+**识记：OSPFv3基本概念；OSPFv3的报文；OSPFv3的LSA类型；OSPFv3的定时器。**
+*   **OSPFv3基本概念**：基于链路状态的协议。运行在IPv6上，独立于网络层地址。
+*   **OSPFv3报文**：Hello、DD、LSR、LSU、LSAck（与v2类似，但报文头有细微变化）。
+*   **LSA类型 (核心变化)**：
+    *   1类和2类LSA：不再包含IP地址信息，只描述拓扑结构。
+    *   **8类 LSA (Link-LSA)**：宣告接口的链路本地地址。
+    *   **9类 LSA (Intra-Area-Prefix-LSA)**：宣告区域内的网段前缀。
+*   **OSPFv3定时器**：Hello时间（默认10s）、Dead时间（默认40s）。
 
-领会：OSPFv3与OSFP的区别。
+**领会：OSPFv3与OSFP的区别。**
+*   **Router ID**：OSPFv3依然使用一个32位的数字（类似IPv4地址格式）作为Router ID，必须手动配置。
+*   **认证方式**：OSPFv3删除了协议自身的认证，直接调用IPv6的IPsec安全机制。
+*   **多实例**：OSPFv3支持在同一条链路上运行多个实例（Instance ID）。
 
-应用：能正确配置OSPFv3路由协议；能灵活使用OSPFv3实现网络连通。
+**应用：能正确配置OSPFv3路由协议；能灵活使用OSPFv3实现网络连通。**
+*   **配置核心**：
+    1. 配置 Router ID。
+    2. 全局开启 OSPFv3 进程。
+    3. **进接口绑定区域**：`ospfv3 1 area 0`。

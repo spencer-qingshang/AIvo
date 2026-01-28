@@ -24,5 +24,14 @@ class TestTemplates(unittest.TestCase):
             self.assertIn("examples: ", content)
             self.assertIn("mastery: ", content)
 
+    def test_grammar_note_template_content(self):
+        template_path = "Templates/Grammar Note.md"
+        self.assertTrue(os.path.exists(template_path), "Templates/Grammar Note.md should exist")
+        
+        with open(template_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            self.assertIn("type: grammar", content)
+            self.assertIn("difficulty: ", content)
+
 if __name__ == '__main__':
     unittest.main()

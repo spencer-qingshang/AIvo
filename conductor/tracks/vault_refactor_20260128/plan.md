@@ -4,8 +4,8 @@
 - [x] Task: Create new directory structure (00_Dashboard, 10_Inputs, 20_Knowledge, 30_Review, 40_Exam, 99_Archive, Templates). [f231320]
 - [~] Task: Create `Templates` folder and draft standard templates.
     - [x] Sub-task: Create `Source Note` template (metadata: source, status, tags). [657076c]
-    - [~] Sub-task: Create `Vocab Note` template (metadata: vocab, definition, examples).
-    - [ ] Sub-task: Create `Grammar Note` template (metadata: grammar, difficulty).
+    - [x] Sub-task: Create `Vocab Note` template (metadata: vocab, definition, examples). [8e56d1b]
+    - [~] Sub-task: Create `Grammar Note` template (metadata: grammar, difficulty).
     - [ ] Sub-task: Create `Error Log` template (metadata: error, reason, related_source).
     - [ ] Sub-task: Create `Daily Review` template (metadata: review, date, score).
 - [ ] Task: Install/Enable Dataview plugin (User verification required).

@@ -1,6 +1,6 @@
 # Implementation Plan - English Learning Vault Refactor
 
-## Phase 1: Preparation & Setup
+## Phase 1: Preparation & Setup [checkpoint: 194e378]
 - [x] Task: Create new directory structure (00=仪表盘, 10=学习素材, 20=知识库, 30=复盘, 40=考试, 99=归档, 模板). [9da8b2c]
 - [x] Task: Create `模板` folder and draft standard templates. [9da8b2c]
     - [x] Sub-task: Create `素材模板` template (metadata: source, status, tags).
@@ -9,7 +9,7 @@
     - [x] Sub-task: Create `错题模板` template (metadata: error, reason, related_source).
     - [x] Sub-task: Create `复盘模板` template (metadata: review, date, score).
 - [x] Task: Install/Enable Dataview plugin (User verification required). [User Verified]
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Setup' (Protocol in workflow.md).
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Setup' (Protocol in workflow.md). [194e378]
 
 ## Phase 2: Automation & Dashboard Implementation
 - [ ] Task: Implement `English_Home.md` (Dashboard).

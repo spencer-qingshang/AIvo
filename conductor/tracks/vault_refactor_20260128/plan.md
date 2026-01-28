@@ -12,10 +12,10 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Preparation & Setup' (Protocol in workflow.md). [194e378]
 
 ## Phase 2: Automation & Dashboard Implementation
-- [ ] Task: Implement `English_Home.md` (Dashboard).
-    - [ ] Sub-task: Add "Active Tasks" query (Dataview).
-    - [ ] Sub-task: Add "Review Queue" query (Dataview).
-    - [ ] Sub-task: Add "Statistics" view (DataviewJS).
+- [~] Task: Implement `English_Home.md` (Dashboard).
+    - [x] Sub-task: Add "Active Tasks" query (Dataview).
+    - [x] Sub-task: Add "Review Queue" query (Dataview).
+    - [x] Sub-task: Add "Statistics" view (DataviewJS).
 - [ ] Task: Implement dynamic views.
     - [ ] Sub-task: Create `Mistake_Bank.md` with auto-aggregated errors.
     - [ ] Sub-task: Create `Vocab_Book.md` with auto-aggregated vocabulary.

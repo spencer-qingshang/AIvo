@@ -9,5 +9,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: 针对项目4 IPv6的园区网络，回答理论大纲问题，并创建包含生活化比喻、命令详解、排错技巧的独立实战手册。**
+- [x] **Track: 针对项目4 IPv6的园区网络，回答理论大纲问题，并创建包含生活化比喻、命令详解、排错技巧的独立实战手册。**
 *Link: [./tracks/ipv6_campus_network/](./tracks/ipv6_campus_network/)*

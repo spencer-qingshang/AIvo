@@ -1,4 +1,4 @@
-﻿---
+---
 type: vocab
 id: "works for me"
 definitions: []

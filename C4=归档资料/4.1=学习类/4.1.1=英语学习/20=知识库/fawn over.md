@@ -1,4 +1,4 @@
-﻿---
+---
 type: vocab
 id: "fawn over"
 definitions: []

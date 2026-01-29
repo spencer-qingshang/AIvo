@@ -1,4 +1,4 @@
-﻿---
+---
 type: vocab
 id: "I'm just saying"
 definitions: []

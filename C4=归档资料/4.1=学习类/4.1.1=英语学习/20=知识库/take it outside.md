@@ -1,4 +1,4 @@
-﻿---
+---
 type: vocab
 id: "take it outside"
 definitions: []

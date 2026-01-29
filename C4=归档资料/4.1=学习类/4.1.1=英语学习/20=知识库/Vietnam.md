@@ -1,4 +1,4 @@
-﻿---
+---
 type: vocab
 id: "Vietnam"
 definitions: []

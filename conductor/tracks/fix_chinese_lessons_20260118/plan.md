@@ -27,12 +27,12 @@
     - [ ] 逐篇核对原文并添加行内注释
     - [ ] 补充作家作品、大纲解析
     - [ ] 生成 AI 老师故事课堂
-- [ ] Task: Conductor - User Manual Verification '相位 2: 现代散文与近现代作品完善' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification '相位 2: 现代散文与近现代作品完善' (Protocol in workflow.md)
 
 ## 相位 3: 全量标准化校验与项目收尾 [checkpoint: ]
 确保 12-27 篇所有笔记在格式和内容上达到规格说明书的要求。
 
-- [ ] Task: 运行全量格式校验脚本
+- [x] Task: 运行全量格式校验脚本
     - [ ] 编写测试检查所有 16 个文件是否包含五个必须章节
     - [ ] 检查文言文篇目是否全部包含“译文”章节
 - [ ] Task: 更新大学语文索引文件

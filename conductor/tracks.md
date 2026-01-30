@@ -14,5 +14,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Create a series of detailed IPv6 practical guides (4.1-4.4) for beginners.**
+- [~] **Track: Create a series of detailed IPv6 practical guides (4.1-4.4) for beginners.**
 *Link: [./tracks/ipv6_series_20260124/](./tracks/ipv6_series_20260124/)*

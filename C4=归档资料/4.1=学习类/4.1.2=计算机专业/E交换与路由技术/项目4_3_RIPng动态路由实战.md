@@ -1,108 +1,112 @@
-# 项目4_3_RIPng 动态路由实战 (零基础保姆级)
+# 项目4_3_RIPng动态路由实战 (超详细保姆级)
 
-> **实验目标**：利用 RIPng 协议（RIP 的下一代，支持 IPv6），让路由器自动通过“聊天”来交换路由信息，无需手动指路。
-> **适用场景**：小型 IPv6 网络，作为动态路由协议入门。
-
----
-
-## 一、 知识点大白话解析
-
-> **1. 什么是 RIPng？**
-> RIPng (Next Generation) 是专门为 IPv6 设计的动态路由协议。
-> **比喻**：就像在一个小区群里，每个邻居都大喊：“我负责 1 号楼！”。过一会儿，整栋楼的人都知道怎么去 1 号楼了。
->
-> **2. 它的规则是什么？**
-> *   **按“跳”数算路**：经过一个路由器就算一跳。最多支持 15 跳，16 跳就认为路断了。
-> *   **组播喊话**：它不再满大街（广播）喊话，而是定向给加入 RIPng 群组的人喊（组播地址 `FF02::9`）。
->
-> **3. 配置上与 IPv4 有什么区别？**
-> *   **IPv4 RIP**：在全局视图下敲 `network 192.168.1.0`。
-> *   **IPv6 RIPng**：**不在全局宣告网段**。你必须进入每一个接口（比如 G0/0/0），直接说：“这个接口加入 RIPng 进程 1 ！”。
+> **实验目标**：配置 RIPng 协议，让三台路由器自动互相学习路由信息。
+> **前置条件**：完成项目 4_1 的 IP 配置。
 
 ---
 
-## 二、 环境准备
+## 一、 清理环境 (必做步骤)
 
-### 1. 清理环境 (重要！)
-如果你刚才做了 **项目 4_2 (静态路由)**，请务必先删除那些手动指的路，否则你看不到动态路由生效的效果。
+> **说明**：如果你刚刚做完了静态路由实验，必须把它们删掉，否则会影响动态路由的实验效果（静态路由优先级高，会覆盖动态路由）。
 
-**在 R1, R2, R3 上分别操作：**
+### 1. 删除 R1 的静态路由
 ```shell
 <R1> system-view
-[R1] undo ipv6 route-static :: 0
+# 删除默认路由 (如果配过)
+[R1] undo ipv6 route-static :: 0 2001:12::2
+# 删除明细路由 (如果配过)
 [R1] undo ipv6 route-static 2001:2:: 64 2001:12::2
-# 提示：如果不确定有没有删干净，输入 display current-configuration | include ipv6 route-static
 ```
-*清理完后，PC1 应该 **无法** Ping 通 PC2。*
+
+### 2. 删除 R2 的静态路由
+```shell
+<R2> system-view
+[R2] undo ipv6 route-static 2001:1:: 64 2001:12::1
+[R2] undo ipv6 route-static 2001:2:: 64 2001:23::3
+```
+
+### 3. 删除 R3 的静态路由
+```shell
+<R3> system-view
+[R3] undo ipv6 route-static 2001:1:: 64 2001:23::2
+```
 
 ---
 
-## 三、 核心配置步骤 (开启自动寻路)
+## 二、 配置 RIPng 协议 (不省略任何设备)
 
-### 1. R1 配置
+> **核心逻辑**：两步走。第一步全局开进程，第二步进接口使能。每一个有 IP 的接口都要配！
+
+### 1. 配置路由器 R1
 ```shell
 <R1> system-view
-[R1] ripng 1                  # 启动 RIPng 进程，编号为 1
+# 第一步：启动 RIPng 进程，进程号设为 1
+[R1] ripng 1
 [R1-ripng-1] quit
 
-# 进入连接 R2 的口，使能 RIPng
+# 第二步：进入连接 R2 的接口 (G0/0/0)
 [R1] interface GigabitEthernet 0/0/0
-[R1-GigabitEthernet0/0/0] ripng 1 enable
+[R1-GigabitEthernet0/0/0] ripng 1 enable   # 【关键】将此接口加入 RIPng 进程1
+[R1-GigabitEthernet0/0/0] quit
 
-# 进入连接 PC1 的口，使能 RIPng (这样大家才知道 1.0 网段在哪)
+# 第三步：进入连接 PC1 的接口 (G0/0/1)
 [R1] interface GigabitEthernet 0/0/1
-[R1-GigabitEthernet0/0/1] ripng 1 enable
+[R1-GigabitEthernet0/0/1] ripng 1 enable   # 【必做】别忘了这个口，否则别人不知道怎么去PC1
+[R1-GigabitEthernet0/0/1] quit
 ```
 
-### 2. R2 配置
+### 2. 配置路由器 R2
 ```shell
 <R2> system-view
 [R2] ripng 1
 [R2-ripng-1] quit
 
+# 左右两个接口都要使能
 [R2] interface GigabitEthernet 0/0/0
 [R2-GigabitEthernet0/0/0] ripng 1 enable
+[R2-GigabitEthernet0/0/0] quit
 
 [R2] interface GigabitEthernet 0/0/1
 [R2-GigabitEthernet0/0/1] ripng 1 enable
+[R2-GigabitEthernet0/0/1] quit
 ```
 
-### 3. R3 配置
+### 3. 配置路由器 R3
 ```shell
 <R3> system-view
 [R3] ripng 1
 [R3-ripng-1] quit
 
+# 两个接口都要使能
 [R3] interface GigabitEthernet 0/0/0
 [R3-GigabitEthernet0/0/0] ripng 1 enable
+[R3-GigabitEthernet0/0/0] quit
 
 [R3] interface GigabitEthernet 0/0/1
 [R3-GigabitEthernet0/0/1] ripng 1 enable
+[R3-GigabitEthernet0/0/1] quit
 ```
 
 ---
 
-## 四、 验证与检查 (见证奇迹)
+## 三、 验证与排错
 
 ### 1. 查看 RIPng 路由表
 在 R1 上输入：
 `display ripng 1 route`
 
-*   **看什么？**：检查列表中是否有 `2001:2::/64` (广州 PC 网段) 和 `2001:23::/64` (骨干网段)。
-*   **状态**：如果能看到这些网段，说明 OSPF 已经通过邻居“学到”了这些知识。
+*   **观察**：能否看到 `2001:2::/64` (这是 PC2 的网段)？
+*   **注意**：RIPng 更新比较慢（30秒一次），如果刚配完没看到，请等一分钟再查。
 
-### 2. 最终 Ping 测试
-打开 **PC1** 的命令行：
+### 2. Ping 测试
+在 PC1 上：
 `ping 2001:2::1`
 
-*   **期待结果**：直接 Ping 通！
+*   **结果**：Reply from ... 即为成功。
 
----
-
-## 五、 新手避坑指南 (常见报错)
-
-1.  **路由表是空的？**
-    *   **原因 1**：检查每个路由器的接口下是否都敲了 `ripng 1 enable`。如果只在全局启动进程而不进接口使能，是没有用的。
-    *   **原因 2**：检查路由器之间是否能 Ping 通对方的接口 IP。
-2.  **配置了没反应？**
-    *   RIPng 反应比较慢（通常每 30 秒才更新一次），敲完命令后请耐心等一会儿，或者多按几次回车。
+### 3. 排错指南
+*   **现象**：路由表里只有直连路由，没有学到远端的。
+*   **原因**：
+    1.  **接口漏配**：最常见的是 R1 忘了在连接 PC1 的接口 (G0/0/1) 上敲 `ripng 1 enable`，导致 R1 不会把 1.0 网段告诉别人。
+    2.  **进程号不一致**：建议所有设备都统一用 `ripng 1`，虽然协议允许多进程，但新手容易搞混。
+    3.  **链路不通**：检查 R1 和 R2 之间物理连接是否正常。

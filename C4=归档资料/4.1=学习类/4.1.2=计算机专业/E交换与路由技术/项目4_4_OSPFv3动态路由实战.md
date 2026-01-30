@@ -1,86 +1,113 @@
-# 项目4_4_OSPFv3动态路由实战 (超详细保姆级)
+# 项目4_4_OSPFv3动态路由实战 (独立完整版)
 
-> **实验目标**：配置 OSPFv3 协议，实现企业级的高效路由。
-> **前置条件**：完成项目 4_1 的 IP 配置。
+> **实验目标**：从零开始，配置企业级 OSPFv3 协议，实现全网互通。
+> **适用场景**：全新的拓扑环境。
 
 ---
 
-## 一、 清理 RIPng 配置 (必做)
+## 一、 物理连线与基础环境 (从零开始)
 
-> **说明**：为了避免 RIPng 干扰，我们需要先关闭它。
+### 1. 摆放与连线
+同前：**3台 AR2220** (`R1-R2-R3`)，**2台 PC**。
+连线：PC1-R1-R2-R3-PC2。
 
-### 1. 删除所有路由器的 RIPng 进程
+---
+
+## 二、 基础 IP 地址配置 (必做铺垫)
+
+### 1. R1 基础配置
 ```shell
-# R1
-<R1> system-view
-[R1] undo ripng 1   # 只要删了全局进程，接口下的配置会自动消失
-
-# R2
-<R2> system-view
-[R2] undo ripng 1
-
-# R3
-<R3> system-view
-[R3] undo ripng 1
+<Huawei> system-view
+[Huawei] sysname R1
+[R1] ipv6
+[R1] interface GigabitEthernet 0/0/1         # 接 PC1
+[R1-GigabitEthernet0/0/1] ipv6 enable
+[R1-GigabitEthernet0/0/1] ipv6 address 2001:1::254 64
+[R1-GigabitEthernet0/0/1] quit
+[R1] interface GigabitEthernet 0/0/0         # 接 R2
+[R1-GigabitEthernet0/0/0] ipv6 enable
+[R1-GigabitEthernet0/0/0] ipv6 address 2001:12::1 64
+[R1-GigabitEthernet0/0/0] quit
 ```
-*操作完后，建议输入 `display this` 确认配置已干净。*
+
+### 2. R2 基础配置
+```shell
+<Huawei> system-view
+[Huawei] sysname R2
+[R2] ipv6
+[R2] interface GigabitEthernet 0/0/0         # 接 R1
+[R2-GigabitEthernet0/0/0] ipv6 enable
+[R2-GigabitEthernet0/0/0] ipv6 address 2001:12::2 64
+[R2-GigabitEthernet0/0/0] quit
+[R2] interface GigabitEthernet 0/0/1         # 接 R3
+[R2-GigabitEthernet0/0/1] ipv6 enable
+[R2-GigabitEthernet0/0/1] ipv6 address 2001:23::2 64
+[R2-GigabitEthernet0/0/1] quit
+```
+
+### 3. R3 基础配置
+```shell
+<Huawei> system-view
+[Huawei] sysname R3
+[R3] ipv6
+[R3] interface GigabitEthernet 0/0/0         # 接 R2
+[R3-GigabitEthernet0/0/0] ipv6 enable
+[R3-GigabitEthernet0/0/0] ipv6 address 2001:23::3 64
+[R3-GigabitEthernet0/0/0] quit
+[R3] interface GigabitEthernet 0/0/1         # 接 PC2
+[R3-GigabitEthernet0/0/1] ipv6 enable
+[R3-GigabitEthernet0/0/1] ipv6 address 2001:2::254 64
+[R3-GigabitEthernet0/0/1] quit
+```
+
+### 4. PC 配置
+*   **PC1**: `2001:1::1` / 64, GW `2001:1::254`
+*   **PC2**: `2001:2::1` / 64, GW `2001:2::254`
 
 ---
 
-## 二、 配置 OSPFv3 协议 (核心部分)
+## 三、 核心：配置 OSPFv3 动态路由
 
-> **核心逻辑**：三步走。1.开进程 -> 2.配 Router-ID (必配!) -> 3.进接口绑定区域。
+> **配置口诀**：先开进程 `ospfv3 1` -> **必须配 Router-ID** -> 进接口绑区域 `ospfv3 1 area 0`。
 
-### 1. 配置路由器 R1
+### 1. 配置 R1 (Router-ID: 1.1.1.1)
 ```shell
-<R1> system-view
-# 第一步：启动 OSPFv3 进程
-[R1] ospfv3 1
-
-# 第二步：配置 Router-ID (这是OSPFv3启动的必要条件)
-# 注意：格式必须是 x.x.x.x，虽然是 IPv6 环境，但 ID 依然长得像 IPv4
-[R1-ospfv3-1] router-id 1.1.1.1
+[R1] ospfv3 1                                # 启动进程
+[R1-ospfv3-1] router-id 1.1.1.1              # 【必配】配置身份证号
 [R1-ospfv3-1] quit
 
-# 第三步：接口绑定区域 (所有接口都划入骨干区域 Area 0)
+# 接口绑定区域
 [R1] interface GigabitEthernet 0/0/0
-[R1-GigabitEthernet0/0/0] ospfv3 1 area 0  # 【关键】绑定到区域0
+[R1-GigabitEthernet0/0/0] ospfv3 1 area 0    # 加入骨干区域 0
 [R1-GigabitEthernet0/0/0] quit
-
-[R1] interface GigabitEthernet 0/0/1
-[R1-GigabitEthernet0/0/1] ospfv3 1 area 0  # 【必做】PC口也要宣告
+[R1] interface GigabitEthernet 0/0/1         # 业务口也必须加入
+[R1-GigabitEthernet0/0/1] ospfv3 1 area 0
 [R1-GigabitEthernet0/0/1] quit
 ```
 
-### 2. 配置路由器 R2
+### 2. 配置 R2 (Router-ID: 2.2.2.2)
 ```shell
-<R2> system-view
 [R2] ospfv3 1
-[R2-ospfv3-1] router-id 2.2.2.2  # ID 不能和 R1 相同
+[R2-ospfv3-1] router-id 2.2.2.2
 [R2-ospfv3-1] quit
 
-# 两个接口都配
 [R2] interface GigabitEthernet 0/0/0
 [R2-GigabitEthernet0/0/0] ospfv3 1 area 0
 [R2-GigabitEthernet0/0/0] quit
-
 [R2] interface GigabitEthernet 0/0/1
 [R2-GigabitEthernet0/0/1] ospfv3 1 area 0
 [R2-GigabitEthernet0/0/1] quit
 ```
 
-### 3. 配置路由器 R3
+### 3. 配置 R3 (Router-ID: 3.3.3.3)
 ```shell
-<R3> system-view
 [R3] ospfv3 1
-[R3-ospfv3-1] router-id 3.3.3.3  # ID 唯一
+[R3-ospfv3-1] router-id 3.3.3.3
 [R3-ospfv3-1] quit
 
-# 两个接口都配
 [R3] interface GigabitEthernet 0/0/0
 [R3-GigabitEthernet0/0/0] ospfv3 1 area 0
 [R3-GigabitEthernet0/0/0] quit
-
 [R3] interface GigabitEthernet 0/0/1
 [R3-GigabitEthernet0/0/1] ospfv3 1 area 0
 [R3-GigabitEthernet0/0/1] quit
@@ -88,33 +115,17 @@
 
 ---
 
-## 三、 验证与深度排错
+## 四、 验证结果
 
-### 1. 检查邻居状态 (最关键的一步)
-在 R1 上输入：
-`display ospfv3 peer`
+1.  **检查邻居状态** (关键)：
+    在 R1 上：`display ospfv3 peer`
+    *   **State**: 必须显示 **Full**。如果是 Init 或 2-Way 都不对。
+2.  **Ping 测试**：
+    PC1 Ping PC2：`ping 2001:2::1`
+    *   **结果**：Reply from... (成功)。
 
-*   **观察**：找到 `State` 这一列。
-*   **满分**：显示 **Full** (表示完全同步)。
-*   **不及格**：
-    *   **Init**：我发了 Hello 包，但还没收到对方的回复。
-    *   **2-Way**：建立了双向通信，但还没开始交换路由信息。
-    *   **Down**：完全不通。
+---
 
-### 2. 检查路由表
-在 R1 上输入：
-`display ipv6 routing-table protocol ospfv3`
-
-*   应该能看到 `2001:2::/64`。
-
-### 3. Ping 测试
-PC1 Ping PC2：`ping 2001:2::1` -> 通！
-
-### 4. 常见坑点 CheckList
-*   **坑1：Router-ID 没配或配重了**
-    *   如果不配 Router-ID，OSPFv3 进程根本起不来。
-    *   如果 R1 和 R2 都配了 1.1.1.1，它俩会打架，邻居建不起来。
-*   **坑2：区域 ID 不一致**
-    *   R1 的接口配了 area 0，R2 的接口配了 area 1，它俩就“语言不通”，无法建立邻居。
-*   **坑3：PC 口没宣告**
-    *   如果 R1 的 G0/0/1 (接 PC1 的口) 没敲 `ospfv3 1 area 0`，虽然 R1 和 R2 邻居正常，但 PC2 永远 ping 不通 PC1，因为 R2 根本不知道 PC1 在哪。
+## 五、 避坑指南
+1.  **邻居起不来**：最常见的原因是忘了配 Router-ID，或者两台路由器的 ID 配重了（比如都配了 1.1.1.1）。
+2.  **区域不一致**：R1 用了 area 0，R2 用了 area 1，这样是建不起来邻居的。初学者统一用 area 0 即可。

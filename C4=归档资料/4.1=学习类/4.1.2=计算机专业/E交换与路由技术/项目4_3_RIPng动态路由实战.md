@@ -1,87 +1,110 @@
-# 项目4_3_RIPng动态路由实战 (超详细保姆级)
+# 项目4_3_RIPng动态路由实战 (独立完整版)
 
-> **实验目标**：配置 RIPng 协议，让三台路由器自动互相学习路由信息。
-> **前置条件**：完成项目 4_1 的 IP 配置。
-
----
-
-## 一、 清理环境 (必做步骤)
-
-> **说明**：如果你刚刚做完了静态路由实验，必须把它们删掉，否则会影响动态路由的实验效果（静态路由优先级高，会覆盖动态路由）。
-
-### 1. 删除 R1 的静态路由
-```shell
-<R1> system-view
-# 删除默认路由 (如果配过)
-[R1] undo ipv6 route-static :: 0 2001:12::2
-# 删除明细路由 (如果配过)
-[R1] undo ipv6 route-static 2001:2:: 64 2001:12::2
-```
-
-### 2. 删除 R2 的静态路由
-```shell
-<R2> system-view
-[R2] undo ipv6 route-static 2001:1:: 64 2001:12::1
-[R2] undo ipv6 route-static 2001:2:: 64 2001:23::3
-```
-
-### 3. 删除 R3 的静态路由
-```shell
-<R3> system-view
-[R3] undo ipv6 route-static 2001:1:: 64 2001:23::2
-```
+> **实验目标**：从零开始，使用 RIPng 协议实现全网自动互通。
+> **适用场景**：全新的拓扑环境。
 
 ---
 
-## 二、 配置 RIPng 协议 (不省略任何设备)
+## 一、 物理连线与基础环境 (从零开始)
 
-> **核心逻辑**：两步走。第一步全局开进程，第二步进接口使能。每一个有 IP 的接口都要配！
+### 1. 摆放与连线
+同项目 4_2：
+*   **3台 AR2220** (`R1`, `R2`, `R3`)，**2台 PC**。
+*   连线：PC1-R1-R2-R3-PC2。
+*   **开启设备**。
 
-### 1. 配置路由器 R1
+---
+
+## 二、 基础 IP 地址配置 (必做铺垫)
+
+> **注意**：如果你已经熟悉了 IP 配置，可以快速刷入。
+
+### 1. R1 基础配置
 ```shell
-<R1> system-view
-# 第一步：启动 RIPng 进程，进程号设为 1
-[R1] ripng 1
-[R1-ripng-1] quit
-
-# 第二步：进入连接 R2 的接口 (G0/0/0)
-[R1] interface GigabitEthernet 0/0/0
-[R1-GigabitEthernet0/0/0] ripng 1 enable   # 【关键】将此接口加入 RIPng 进程1
+<Huawei> system-view
+[Huawei] sysname R1
+[R1] ipv6
+[R1] interface GigabitEthernet 0/0/1         # 接 PC1
+[R1-GigabitEthernet0/0/1] ipv6 enable
+[R1-GigabitEthernet0/0/1] ipv6 address 2001:1::254 64
+[R1-GigabitEthernet0/0/1] quit
+[R1] interface GigabitEthernet 0/0/0         # 接 R2
+[R1-GigabitEthernet0/0/0] ipv6 enable
+[R1-GigabitEthernet0/0/0] ipv6 address 2001:12::1 64
 [R1-GigabitEthernet0/0/0] quit
+```
 
-# 第三步：进入连接 PC1 的接口 (G0/0/1)
-[R1] interface GigabitEthernet 0/0/1
-[R1-GigabitEthernet0/0/1] ripng 1 enable   # 【必做】别忘了这个口，否则别人不知道怎么去PC1
+### 2. R2 基础配置
+```shell
+<Huawei> system-view
+[Huawei] sysname R2
+[R2] ipv6
+[R2] interface GigabitEthernet 0/0/0         # 接 R1
+[R2-GigabitEthernet0/0/0] ipv6 enable
+[R2-GigabitEthernet0/0/0] ipv6 address 2001:12::2 64
+[R2-GigabitEthernet0/0/0] quit
+[R2] interface GigabitEthernet 0/0/1         # 接 R3
+[R2-GigabitEthernet0/0/1] ipv6 enable
+[R2-GigabitEthernet0/0/1] ipv6 address 2001:23::2 64
+[R2-GigabitEthernet0/0/1] quit
+```
+
+### 3. R3 基础配置
+```shell
+<Huawei> system-view
+[Huawei] sysname R3
+[R3] ipv6
+[R3] interface GigabitEthernet 0/0/0         # 接 R2
+[R3-GigabitEthernet0/0/0] ipv6 enable
+[R3-GigabitEthernet0/0/0] ipv6 address 2001:23::3 64
+[R3-GigabitEthernet0/0/0] quit
+[R3] interface GigabitEthernet 0/0/1         # 接 PC2
+[R3-GigabitEthernet0/0/1] ipv6 enable
+[R3-GigabitEthernet0/0/1] ipv6 address 2001:2::254 64
+[R3-GigabitEthernet0/0/1] quit
+```
+
+### 4. PC 配置
+*   **PC1**: `2001:1::1` / 64, GW `2001:1::254`
+*   **PC2**: `2001:2::1` / 64, GW `2001:2::254`
+
+---
+
+## 三、 核心：配置 RIPng 动态路由
+
+> **配置口诀**：先开进程 `ripng 1`，再进接口 `ripng 1 enable`。每个有 IP 的口都要配！
+
+### 1. 配置 R1 (开启 RIPng)
+```shell
+[R1] ripng 1                                 # 启动进程
+[R1-ripng-1] quit
+[R1] interface GigabitEthernet 0/0/0         # 互联口
+[R1-GigabitEthernet0/0/0] ripng 1 enable
+[R1-GigabitEthernet0/0/0] quit
+[R1] interface GigabitEthernet 0/0/1         # 业务口 (必配!)
+[R1-GigabitEthernet0/0/1] ripng 1 enable
 [R1-GigabitEthernet0/0/1] quit
 ```
 
-### 2. 配置路由器 R2
+### 2. 配置 R2 (开启 RIPng)
 ```shell
-<R2> system-view
 [R2] ripng 1
 [R2-ripng-1] quit
-
-# 左右两个接口都要使能
 [R2] interface GigabitEthernet 0/0/0
 [R2-GigabitEthernet0/0/0] ripng 1 enable
 [R2-GigabitEthernet0/0/0] quit
-
 [R2] interface GigabitEthernet 0/0/1
 [R2-GigabitEthernet0/0/1] ripng 1 enable
 [R2-GigabitEthernet0/0/1] quit
 ```
 
-### 3. 配置路由器 R3
+### 3. 配置 R3 (开启 RIPng)
 ```shell
-<R3> system-view
 [R3] ripng 1
 [R3-ripng-1] quit
-
-# 两个接口都要使能
 [R3] interface GigabitEthernet 0/0/0
 [R3-GigabitEthernet0/0/0] ripng 1 enable
 [R3-GigabitEthernet0/0/0] quit
-
 [R3] interface GigabitEthernet 0/0/1
 [R3-GigabitEthernet0/0/1] ripng 1 enable
 [R3-GigabitEthernet0/0/1] quit
@@ -89,24 +112,16 @@
 
 ---
 
-## 三、 验证与排错
+## 四、 验证结果
 
-### 1. 查看 RIPng 路由表
-在 R1 上输入：
-`display ripng 1 route`
+1.  **查看路由表**：
+    在 R1 上：`display ripng 1 route`
+    *   你应该能看到 `2001:2::/64` 的路由信息。
+2.  **Ping 测试**：
+    PC1 Ping PC2：`ping 2001:2::1`
+    *   **结果**：Reply from... (成功)。
 
-*   **观察**：能否看到 `2001:2::/64` (这是 PC2 的网段)？
-*   **注意**：RIPng 更新比较慢（30秒一次），如果刚配完没看到，请等一分钟再查。
+---
 
-### 2. Ping 测试
-在 PC1 上：
-`ping 2001:2::1`
-
-*   **结果**：Reply from ... 即为成功。
-
-### 3. 排错指南
-*   **现象**：路由表里只有直连路由，没有学到远端的。
-*   **原因**：
-    1.  **接口漏配**：最常见的是 R1 忘了在连接 PC1 的接口 (G0/0/1) 上敲 `ripng 1 enable`，导致 R1 不会把 1.0 网段告诉别人。
-    2.  **进程号不一致**：建议所有设备都统一用 `ripng 1`，虽然协议允许多进程，但新手容易搞混。
-    3.  **链路不通**：检查 R1 和 R2 之间物理连接是否正常。
+## 五、 避坑指南
+1.  **忘记宣告 PC 所在的接口**：这是新手最容易犯的错。如果你不在 R1 的 G0/0/1 接口下敲 `ripng 1 enable`，R1 就不会把 "我家有 1.0 网段" 这件事告诉 R2 和 R3，导致回包回不来。

@@ -15,9 +15,9 @@
 
 ## 第二阶段：项目6 实操手册编写 (Security Manuals)
 
-- [x] Task: 编写“项目6_1_接入安全实战.md”
-- [x] Task: 编写“项目6_2_ACL与NAT实战.md”
-- [~] Task: 编写“项目6_3_防火墙基础实战.md”
+- [x] Task: 编写“项目6_1_接入安全实战.md” a0e2627
+- [x] Task: 编写“项目6_2_ACL与NAT实战.md” a0e2627
+- [x] Task: 编写“项目6_3_防火墙基础实战.md” a0e2627
 - [ ] Task: Conductor - User Manual Verification '第二阶段：项目6 实操手册编写' (Protocol in workflow.md)
 
 ---

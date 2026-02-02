@@ -19,7 +19,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: 补充项目6、7大纲及生成园区网实操手册**
+- [x] **Track: 补充项目6、7大纲及生成园区网实操手册**
 *Link: [./tracks/security_and_comprehensive_labs_20260202/](./tracks/security_and_comprehensive_labs_20260202/)*
 
 

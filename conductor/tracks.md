@@ -22,4 +22,9 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: 补充项目6、7大纲及生成园区网实操手册**
 *Link: [./tracks/security_and_comprehensive_labs_20260202/](./tracks/security_and_comprehensive_labs_20260202/)*
 
+---
+
+- [~] **Track: 修正项目5的实操手册，补充详细的设备拖动与物理连线步骤**
+*Link: [./tracks/fix_project5_manuals_20260202/](./tracks/fix_project5_manuals_20260202/)*
+
 

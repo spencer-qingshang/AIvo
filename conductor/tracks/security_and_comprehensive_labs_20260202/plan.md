@@ -5,19 +5,19 @@
 
 ---
 
-## 第一阶段：理论大纲深度补充 (Theory Update)
+## 第一阶段：理论大纲深度补充 (Theory Update) [checkpoint: 3d6429b]
 
-- [~] Task: 补充“项目6 构建安全的园区网络.md”理论内容
-- [~] Task: 补充“项目7 园区网络综合实训.md”理论内容
-- [ ] Task: Conductor - User Manual Verification '第一阶段：理论大纲深度补充' (Protocol in workflow.md)
+- [x] Task: 补充“项目6 构建安全的园区网络.md”理论内容 3d6429b
+- [x] Task: 补充“项目7 园区网络综合实训.md”理论内容 3d6429b
+- [x] Task: Conductor - User Manual Verification '第一阶段：理论大纲深度补充' (Protocol in workflow.md)
 
 ---
 
 ## 第二阶段：项目6 实操手册编写 (Security Manuals)
 
-- [ ] Task: 编写“项目6_1_接入安全实战.md”
-- [ ] Task: 编写“项目6_2_ACL与NAT实战.md”
-- [ ] Task: 编写“项目6_3_防火墙基础实战.md”
+- [x] Task: 编写“项目6_1_接入安全实战.md”
+- [x] Task: 编写“项目6_2_ACL与NAT实战.md”
+- [~] Task: 编写“项目6_3_防火墙基础实战.md”
 - [ ] Task: Conductor - User Manual Verification '第二阶段：项目6 实操手册编写' (Protocol in workflow.md)
 
 ---

@@ -5,16 +5,16 @@
 
 ---
 
-## 第一阶段：大纲内容补充 (Theory Update)
+## 第一阶段：大纲内容补充 (Theory Update) [checkpoint: 913894a]
 
 - [x] Task: 补充“项目5 构建无线的园区网络.md”的理论内容 58e5af4
-- [ ] Task: Conductor - User Manual Verification '第一阶段：大纲内容补充' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification '第一阶段：大纲内容补充' (Protocol in workflow.md)
 
 ---
 
 ## 第二阶段：直连式二层WLAN实操手册编写 (Manual 1)
 
-- [ ] Task: 编写“项目5_1_直连二层WLAN实战.md”
+- [x] Task: 编写“项目5_1_直连二层WLAN实战.md” 19168c9
 - [ ] Task: Conductor - User Manual Verification '第二阶段：直连式二层WLAN实操手册编写' (Protocol in workflow.md)
 
 ---

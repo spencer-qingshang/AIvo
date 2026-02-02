@@ -19,5 +19,4 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [x] **Track: 补充项目5大纲及生成直连/旁挂WLAN实操手册**
-*Link: [./tracks/wlan_project5_supplement_20260202/](./tracks/wlan_project5_supplement_20260202/)*
+

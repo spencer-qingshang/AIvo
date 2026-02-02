@@ -19,15 +19,15 @@
 
 ---
 
-## 第三阶段：旁挂式三层WLAN实操手册编写 (Manual 2)
+## 第三阶段：旁挂式三层WLAN实操手册编写 (Manual 2) [checkpoint: 267a099]
 
 - [x] Task: 编写“项目5_2_旁挂三层WLAN实战.md” 4c80e43
-- [ ] Task: Conductor - User Manual Verification '第三阶段：旁挂式三层WLAN实操手册编写' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification '第三阶段：旁挂式三层WLAN实操手册编写' (Protocol in workflow.md)
 
 ---
 
 ## 第四阶段：归档与登记 (Finalization)
 
-- [ ] Task: 更新 Tracks Registry
-- [ ] Task: 更新 Metadata
-- [ ] Task: Conductor - User Manual Verification '第四阶段：归档与登记' (Protocol in workflow.md)
+- [x] Task: 更新 Tracks Registry
+- [x] Task: 更新 Metadata
+- [x] Task: Conductor - User Manual Verification '第四阶段：归档与登记' (Protocol in workflow.md)

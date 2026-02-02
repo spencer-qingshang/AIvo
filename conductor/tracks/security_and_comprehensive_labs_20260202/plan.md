@@ -8,7 +8,7 @@
 ## 第一阶段：理论大纲深度补充 (Theory Update)
 
 - [~] Task: 补充“项目6 构建安全的园区网络.md”理论内容
-- [ ] Task: 补充“项目7 园区网络综合实训.md”理论内容
+- [~] Task: 补充“项目7 园区网络综合实训.md”理论内容
 - [ ] Task: Conductor - User Manual Verification '第一阶段：理论大纲深度补充' (Protocol in workflow.md)
 
 ---

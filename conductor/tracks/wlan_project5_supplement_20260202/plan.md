@@ -7,7 +7,7 @@
 
 ## 第一阶段：大纲内容补充 (Theory Update)
 
-- [~] Task: 补充“项目5 构建无线的园区网络.md”的理论内容
+- [x] Task: 补充“项目5 构建无线的园区网络.md”的理论内容 58e5af4
 - [ ] Task: Conductor - User Manual Verification '第一阶段：大纲内容补充' (Protocol in workflow.md)
 
 ---

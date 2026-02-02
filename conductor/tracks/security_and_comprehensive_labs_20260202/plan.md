@@ -24,7 +24,7 @@
 
 ## 第三阶段：项目7 综合实训手册编写 (Final Lab)
 
-- [~] Task: 编写“项目7_综合组网演练手册.md”
+- [x] Task: 编写“项目7_综合组网演练手册.md” 644f40b
 - [ ] Task: Conductor - User Manual Verification '第三阶段：项目7 综合实训手册编写' (Protocol in workflow.md)
 
 ---

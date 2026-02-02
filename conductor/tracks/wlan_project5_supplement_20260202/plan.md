@@ -12,16 +12,16 @@
 
 ---
 
-## 第二阶段：直连式二层WLAN实操手册编写 (Manual 1)
+## 第二阶段：直连式二层WLAN实操手册编写 (Manual 1) [checkpoint: 0499a79]
 
 - [x] Task: 编写“项目5_1_直连二层WLAN实战.md” 19168c9
-- [ ] Task: Conductor - User Manual Verification '第二阶段：直连式二层WLAN实操手册编写' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification '第二阶段：直连式二层WLAN实操手册编写' (Protocol in workflow.md)
 
 ---
 
 ## 第三阶段：旁挂式三层WLAN实操手册编写 (Manual 2)
 
-- [ ] Task: 编写“项目5_2_旁挂三层WLAN实战.md”
+- [x] Task: 编写“项目5_2_旁挂三层WLAN实战.md” 4c80e43
 - [ ] Task: Conductor - User Manual Verification '第三阶段：旁挂式三层WLAN实操手册编写' (Protocol in workflow.md)
 
 ---

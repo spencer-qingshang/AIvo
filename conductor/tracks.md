@@ -16,3 +16,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 - [x] **Track: Create a series of detailed IPv6 practical guides (4.1-4.4) for beginners.**
 *Link: [./tracks/ipv6_series_20260124/](./tracks/ipv6_series_20260124/)*
+
+---
+
+- [~] **Track: 补充项目5大纲及生成直连/旁挂WLAN实操手册**
+*Link: [./tracks/wlan_project5_supplement_20260202/](./tracks/wlan_project5_supplement_20260202/)*

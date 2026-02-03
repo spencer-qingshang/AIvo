@@ -27,4 +27,9 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: 修正项目5的实操手册，补充详细的设备拖动与物理连线步骤**
 *Link: [./tracks/fix_project5_manuals_20260202/](./tracks/fix_project5_manuals_20260202/)*
 
+---
+
+- [~] **Track: 2026 考期优化：通过免考策略提速毕业**
+*Link: [./tracks/exam_optimization_20260203/](./tracks/exam_optimization_20260203/)*
+
 

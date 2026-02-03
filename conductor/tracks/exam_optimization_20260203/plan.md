@@ -22,5 +22,5 @@
 - [x] Task: Conductor - User Manual Verification '计划重构' (Protocol in workflow.md)
 
 ## 第四阶段：收尾
-- [ ] Task: 提交所有文档变更并记录 Git Notes。
-- [ ] Task: Conductor - User Manual Verification '最终交付' (Protocol in workflow.md)
+- [x] Task: 提交所有文档变更并记录 Git Notes。
+- [x] Task: Conductor - User Manual Verification '最终交付' (Protocol in workflow.md)

@@ -16,10 +16,10 @@
 - [x] Task: 更新里程碑预测日期（专科 2026.10 通关，本科 2028.04 通关）。
 
 ## 第三阶段：一致性校验与交付
-- [ ] Task: 编写 Python 脚本 `verify_exam_schedule.py` 自动化检测新计划中的档期冲突。
-- [ ] Task: 运行校验脚本并确保 0 冲突。
-- [ ] Task: 更新 `GEMINI.md` 或相关仪表盘，反射最新的毕业预测时间。
-- [ ] Task: Conductor - User Manual Verification '计划重构' (Protocol in workflow.md)
+- [x] Task: 编写 Python 脚本 `verify_exam_schedule.py` 自动化检测新计划中的档期冲突。
+- [x] Task: 运行校验脚本并确保 0 冲突。
+- [x] Task: 更新 `GEMINI.md` 或相关仪表盘，反射最新的毕业预测时间。
+- [x] Task: Conductor - User Manual Verification '计划重构' (Protocol in workflow.md)
 
 ## 第四阶段：收尾
 - [ ] Task: 提交所有文档变更并记录 Git Notes。

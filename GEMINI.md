@@ -53,6 +53,11 @@ The vault follows a specific workflow-based organization method (C1-C5):
   - `obsidian-custom-attachment-location`: Manages attachment (image) paths.
   - `easy-typing-obsidian`: Enhances text input.
 
+## 🎓 自考毕业里程碑 (2026 优化版)
+- **专科笔试通关预测**：2026年10月 (因免考 13793 提前半年)
+- **本科笔试通关预测**：2028年04月 (因计划整体前移提前半年)
+- **核心策略**：免考《计算机程序设计基础 (13793)》，腾出周六下午黄金档期。
+
 ## Usage Guidelines
 - **Language:** The primary language of notes is **Chinese**.
 - **Note-Taking:** Notes are Markdown-formatted.

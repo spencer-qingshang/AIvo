@@ -29,7 +29,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: 2026 考期优化：通过免考策略提速毕业**
+- [x] **Track: 2026 考期优化：通过免考策略提速毕业**
 *Link: [./tracks/exam_optimization_20260203/](./tracks/exam_optimization_20260203/)*
 
 

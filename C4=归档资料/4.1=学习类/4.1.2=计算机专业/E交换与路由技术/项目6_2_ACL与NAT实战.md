@@ -152,20 +152,35 @@
 ### 3. 专业命令查看
 ```shell
 [AR1] display nat session all
-# 结果示例：
-# NAT Session Table Information:
-# Protocol          : ICMP(1)
-# SrcAddr   Port    : 192.168.1.20   256   <--- 内网真实 IP
-# DestAddr  Port    : 202.100.1.2    256
-# NAT-Info
-#   New SrcAddr     : 202.100.1.1    <--- 转换后的公网 IP
+# 如果这里是空的，说明包连 NAT 这一步都没走到。
 ```
 
 ---
 
-## 五、 保存配置 (必做!)
+## 五、 避坑与排错指南 (实战经验)
 
-**AR1 和 ISP 都要保存**：
+> **重要**：如果实验中发现 PC1 (好人) 也 Ping 不通网关，请按以下步骤自查：
+
+### 1. ACL 的“隐式拒绝”陷阱
+*   **现象**：配置完 `traffic-filter` 后，所有人都上不了网。
+*   **原因**：在某些场景下，ACL 匹配不到的流量会被默认丢弃。
+*   **解决方案**：编写 ACL 时，最后一行必须显式写上 `rule permit source any`。**千万不要省略 `source any`**，否则逻辑可能失效。
+
+### 2. 科学的排错顺序 (由近及远)
+不要一上来就 Ping 百度，分三步走：
+1.  **Ping 接口 (地基)**：PC1 -> 192.168.1.254。如果不通，检查线缆和 IP 填没填对。
+2.  **Ping 对端 (路由)**：AR1 -> 202.100.1.2。如果不通，检查路由器互联接口 IP。
+3.  **Ping 全程 (NAT)**：PC1 -> 202.100.1.2。如果不通，检查 `nat outbound` 和 `default route`。
+
+### 3. “大力出奇迹”重置法
+如果命令看着都对，但就是不通：
+1.  在 AR1 接口下执行 `undo traffic-filter inbound`。
+2.  如果通了，说明就是 ACL 写得不够严谨，删掉重写。
+3.  确保在 PC 界面点过 **Apply (应用)**。
+
+---
+
+## 六、 保存配置 (必做!)
 ```shell
 <AR1> save
 <ISP> save

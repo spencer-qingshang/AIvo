@@ -94,3 +94,25 @@
     *   右键 ISP 的 GE0/0/0 接口，选择 **开始抓包 (Start Capture)**。
     *   PC1 ping 202.100.1.2。
     *   查看 Wireshark 抓包结果：源 IP 应该是 **202.100.1.1** (公网IP)，而不是 192.168.1.10。
+
+### 3. 专业命令验证
+*   **查看 ACL 命中统计** (看看有没有人被拦截)：
+    ```shell
+    [AR1] display acl 2000
+    # 关注 "matches" 字段。如果 PC2 ping 了，这里应该有计数据。
+    ```
+*   **查看 NAT 转换表** (看看谁正在上网)：
+    ```shell
+    [AR1] display nat session all
+    # 能看到内网 IP (Inside) 和公网 IP (Outside) 的映射关系。
+    ```
+
+---
+
+## 五、 保存配置 (必做!)
+
+**AR1 和 ISP 都要保存**：
+```shell
+<AR1> save
+<ISP> save
+```

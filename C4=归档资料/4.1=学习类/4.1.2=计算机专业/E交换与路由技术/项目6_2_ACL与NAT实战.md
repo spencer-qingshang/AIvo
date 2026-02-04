@@ -39,28 +39,42 @@
 
 ---
 
-## 二、 ACL 实战 (门禁卡)
+## 二、 ACL 实战 (门禁卡升级版)
 
-### 1. 基本 ACL (禁止员工上网)
+### 1. 基础 ACL 2000 (一刀切：禁止某人上网)
 ```shell
 [AR1] acl 2000
 [AR1-acl-basic-2000] rule deny source 192.168.1.20 0
-# 大白话：拒绝源 IP 是 192.168.1.20 (PC2) 的流量。
+# 大白话：PC2 (192.168.1.20) 被拉黑了，啥也干不了。
 [AR1-acl-basic-2000] rule permit source any
-# 大白话：除了上面拒绝的，其他人（any）都允许通过。
 [AR1-acl-basic-2000] quit
 ```
 
-### 2. 应用 ACL
+### 2. 高级 ACL 3000 (精细化：只禁 Ping，允许别的)
+> **进阶挑战**：如果我们只想禁止 PC1 Ping 通外网，但允许它正常上网浏览网页，该怎么办？
 ```shell
+[AR1] acl 3000
+[AR1-acl-adv-3000] rule deny icmp source 192.168.1.10 0 destination any
+# 大白话：禁止 PC1 发出的 ICMP (Ping) 包去往任何地方。
+[AR1-acl-adv-3000] rule permit ip source any destination any
+# 大白话：放行其他所有 IP 流量（包括 TCP/UDP 等）。
+[AR1-acl-adv-3000] quit
+```
+
+### 3. 应用 ACL (二选一)
+**注意**：一个接口的一个方向只能应用一个 ACL。如果你想试 ACL 3000，需要先删掉 ACL 2000 的配置。
+```shell
+# 先清除之前的配置（如果有）
 [AR1] interface g0/0/0
-[AR1-GigabitEthernet0/0/0] traffic-filter inbound acl 2000
-# 大白话：在内网接口的“入口”处安检。只要数据包一进路由器，先查 ACL 2000。
+[AR1-GigabitEthernet0/0/0] undo traffic-filter inbound
+
+# 应用高级 ACL 3000
+[AR1-GigabitEthernet0/0/0] traffic-filter inbound acl 3000
 ```
 
 ---
 
-## 三、 NAT 实战 (Easy-IP)
+## 三、 NAT 实战 (Easy-IP 伪装术)
 
 ### 1. 定义允许 NAT 的流量 (ACL)
 ```shell
@@ -85,27 +99,35 @@
 
 ---
 
-## 四、 验证
+## 四、 验证 (拿出证据)
 
-1.  **ACL 验证**：
-    *   PC1 ping 202.100.1.2 -> **通**。
-    *   PC2 ping 202.100.1.2 -> **不通** (被 ACL 2000 拦住了)。
-2.  **NAT 验证**：
-    *   右键 ISP 的 GE0/0/0 接口，选择 **开始抓包 (Start Capture)**。
-    *   PC1 ping 202.100.1.2。
-    *   查看 Wireshark 抓包结果：源 IP 应该是 **202.100.1.1** (公网IP)，而不是 192.168.1.10。
+### 1. ACL 验证 (以 ACL 3000 为例)
+*   **PC1 ping 202.100.1.2** -> **不通** (Request timeout)。
+    *   *原因*：命中 rule deny icmp。
+*   **PC1 访问 HTTP 服务** (如果 ISP 开启了 HTTP Server) -> **能通**。
+    *   *说明*：只禁了 Ping，没禁别的。
 
-### 3. 专业命令验证
-*   **查看 ACL 命中统计** (看看有没有人被拦截)：
-    ```shell
-    [AR1] display acl 2000
-    # 关注 "matches" 字段。如果 PC2 ping 了，这里应该有计数据。
-    ```
-*   **查看 NAT 转换表** (看看谁正在上网)：
-    ```shell
-    [AR1] display nat session all
-    # 能看到内网 IP (Inside) 和公网 IP (Outside) 的映射关系。
-    ```
+### 2. NAT 验证 (抓包实锤)
+这是最关键的一步，证明 NAT 真的生效了：
+1.  **开启抓包**：右键点击 ISP 的 `GE 0/0/0` 接口，选择 **Start Capture (开始抓包)**。
+2.  **产生流量**：让 PC2 (或未被禁 Ping 的 PC) 去 `ping 202.100.1.2`。
+3.  **观察 Wireshark**：
+    *   在 Wireshark 过滤器栏输入 `icmp`。
+    *   查看 **Source (源地址)** 列。
+    *   **成功标志**：你应该看到源 IP 是 **202.100.1.1** (AR1 的外网口地址)，**绝对不能**是 192.168.1.20。
+    *   *原理*：NAT 把私网 IP 偷梁换柱成了公网 IP。
+
+### 3. 专业命令查看
+```shell
+[AR1] display nat session all
+# 结果示例：
+# NAT Session Table Information:
+# Protocol          : ICMP(1)
+# SrcAddr   Port    : 192.168.1.20   256   <--- 内网真实 IP
+# DestAddr  Port    : 202.100.1.2    256
+# NAT-Info
+#   New SrcAddr     : 202.100.1.1    <--- 转换后的公网 IP
+```
 
 ---
 

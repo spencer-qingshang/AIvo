@@ -136,11 +136,32 @@
 
 ## 五、 故障排查 (Troubleshooting)
 
-1.  **Ping 不通？**
+### 1. 必杀技：打开 Debug 调试
+如果你死活 Ping 不通，协议状态一直是 DOWN，不要猜，直接看设备怎么说：
+```shell
+<R1> debugging ppp all
+<R1> terminal monitor
+<R1> terminal debugging
+# 然后重启接口 (shutdown -> undo shutdown)
+```
+*   **现象 A**：看到 `PAP/CHAP authentication failed`。
+    *   *原因*：账号或密码错了。
+*   **现象 B**：看到 `Timeout`。
+    *   *原因*：链路不通，或者对面根本没配认证回应。
+*   **用完记得关掉**：`<R1> undo debugging all`。
+
+### 2. 常见问题
+*   **Ping 不通？**
     *   检查 `display ip interface brief`，看 Serial 口是不是 UP。
-    *   如果 Protocol 是 DOWN，大概率是认证没通过（密码输错了）。
-2.  **eNSP 里没有 Serial 口？**
+    *   如果 Protocol 是 DOWN，大概率是认证没通过。
+*   **eNSP 里没有 Serial 口？**
     *   请回顾“环境准备”，必须先关机，拖入 `2SA` 模块，再开机。
-3.  **Authentication-mode 选哪种？**
+*   **Authentication-mode 选哪种？**
     *   两边必须一致？不对。是**服务端**决定用什么模式，**客户端**配合配置对应的参数。
-    *   如果服务端配了 `pap`，客户端就得发 `pap` 包。
+
+### 3. 进阶挑战：双向认证
+目前的配置是 R1 认证 R2（R1 是考官）。如果 R2 也不信任 R1，想反过来认证 R1 怎么办？
+*   **思路**：两边都当“考官”，同时也都当“考生”。
+*   **R1**：既配 `ppp authentication-mode`，也配 `ppp chap user/password`。
+*   **R2**：同上。
+*   只有双方都通过了对方的考试，链路才会 UP。这是最高安全级别的配置。

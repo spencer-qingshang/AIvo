@@ -20,27 +20,32 @@
 *   选择 **Serial** 线（红色闪电折线）。
 *   连接 **R1** 的 `Serial 1/0/0` (或你加装的槽位端口) <--> **R2** 的 `Serial 1/0/0`。
 
-### 3. 开机与基础配置
-*   启动两台路由器。
-*   **R1 (认证方/服务端)**：
+### 3. 开机与基础配置 (打通物理层)
+*   **配置 R1 (认证方/服务端)**：
     ```shell
     <Huawei> system-view
     [Huawei] sysname R1
-    [R1] interface serial 1/0/0
+    [R1] interface serial 1/0/0 (或者 serial 2/0/0，看你插在哪)
     [R1-Serial1/0/0] link-protocol ppp
-    # 说明：华为串口默认就是 PPP 协议，但这步确认一下是个好习惯。
+    # 说明：华为串口默认就是 PPP 协议。
     [R1-Serial1/0/0] ip address 10.1.1.1 30
+    [R1-Serial1/0/0] quit
     ```
-*   **R2 (被认证方/客户端)**：
+
+*   **配置 R2 (被认证方/客户端)**：
     ```shell
     <Huawei> system-view
     [Huawei] sysname R2
     [R2] interface serial 1/0/0
     [R2-Serial1/0/0] link-protocol ppp
     [R2-Serial1/0/0] ip address 10.1.1.2 30
+    [R2-Serial1/0/0] quit
     ```
-*   **连通性测试**：此时还没配认证，直接 Ping 应该能通。
-    *   `[R1] ping 10.1.1.2` -> Reply ...
+
+*   **连通性测试**：
+    *   此时还没配认证，直接 Ping 应该能通。
+    *   在 **R1** 上输入：`ping 10.1.1.2`。
+    *   **结果**：应该看到 `Reply from ...`。如果不通，检查线有没有插对接口。
 
 ---
 

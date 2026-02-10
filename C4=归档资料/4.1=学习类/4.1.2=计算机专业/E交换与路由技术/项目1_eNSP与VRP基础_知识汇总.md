@@ -18,6 +18,21 @@
 - **接口视图**：[Huawei-GigabitEthernet0/0/0]。进入特定接口配置参数。
 - **协议视图**：[Huawei-ospf-1]。配置动态路由等协议。
 
+### 4. 命令行交互与帮助（隐藏重点）
+- **上下文帮助 `?`**：在任何位置输入 `?` 可查看可用命令或参数。
+- **自动补全 `Tab`**：输入命令前缀后按 `Tab` 补全。
+- **快捷键**：
+  - `Ctrl+Z`：直接退回用户视图。
+  - `Ctrl+C`：停止当前执行的操作。
+  - `Ctrl+A` / `Ctrl+E`：光标移动到行首/行尾。
+- **历史记录**：使用上下方向键调回命令，`display history-command` 查看记录。
+
+### 5. 线缆与接口识记
+- **常用线缆**：
+  - **Copper (铜缆/网线)**：连接 GE/Ethernet 接口。
+  - **Serial (串口线)**：连接 Serial 接口（常用于广域网 PPP/HDLC 实验）。
+- **接口命名**：`接口类型 槽位/子卡/接口序号`，例如 `GigabitEthernet 0/0/0`。
+
 ---
 
 ## 二、 核心命令速查表
@@ -31,6 +46,7 @@
 | 查看当前运行配置 | `display current-configuration` | 简写 `dis cu` |
 | 查看接口状态 | `display ip interface brief` | 简写 `dis ip int br` |
 | 查看视图下配置 | `display this` | 视图敏感命令 |
+| 查看历史命令 | `display history-command` | 默认记录10条 |
 | 保存配置 | `save` | 用户视图下操作 |
 | 重启设备 | `reboot` | 用户视图下操作 |
 

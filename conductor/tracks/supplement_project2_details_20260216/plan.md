@@ -17,3 +17,10 @@
 - [x] Task: 植入“考试贴士”与“常见错误分析” [07a60ea]
 - [x] Task: 全文格式校对与层级优化 [07a60ea]
 - [ ] Task: Conductor - User Manual Verification 'Exam Tips & Polish' (Protocol in workflow.md) [checkpoint: ]
+
+## Phase 4: Missing Links & Management Details
+- [x] Task: 补充交换机 CLI 基础与视图管理 [a0f4ed2]
+- [x] Task: 补充 Hybrid 端口详细逻辑（必考） [a0f4ed2]
+- [x] Task: 补充 STP 端口状态与 BPDU 细节 [a0f4ed2]
+- [x] Task: 补充设备远程管理 (VTY/AAA) 配置 [a0f4ed2]
+- [ ] Task: Conductor - User Manual Verification 'Final Completion' (Protocol in workflow.md) [checkpoint: ]

@@ -14,6 +14,6 @@
 - [ ] Task: Conductor - User Manual Verification 'Command & Scenarios' (Protocol in workflow.md) [checkpoint: ]
 
 ## Phase 3: Exam Tips & Polish
-- [ ] Task: 植入“考试贴士”与“常见错误分析”
-- [ ] Task: 全文格式校对与层级优化
+- [x] Task: 植入“考试贴士”与“常见错误分析” [07a60ea]
+- [x] Task: 全文格式校对与层级优化 [07a60ea]
 - [ ] Task: Conductor - User Manual Verification 'Exam Tips & Polish' (Protocol in workflow.md) [checkpoint: ]

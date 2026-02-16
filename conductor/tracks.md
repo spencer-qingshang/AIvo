@@ -29,5 +29,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: 项目2 运用交换机构建小型园区网络 制作笔记到项目2**
+- [x] **Track: 项目2 运用交换机构建小型园区网络 制作笔记到项目2**
 *Link: [./tracks/init_project2_notes_20260216/](./tracks/init_project2_notes_20260216/)*

@@ -9,8 +9,8 @@
 - [ ] Task: Conductor - User Manual Verification 'Theoretical Depth' (Protocol in workflow.md) [checkpoint: ]
 
 ## Phase 2: Command Dictionary & Scenarios
-- [ ] Task: 整理项目 2 核心命令字典表
-- [ ] Task: 编写 4 个典型实验场景的配置模板（VLAN/Trunk/三层路由/DHCP）
+- [x] Task: 整理项目 2 核心命令字典表 [f846e76]
+- [x] Task: 编写 4 个典型实验场景的配置模板（VLAN/Trunk/三层路由/DHCP） [f846e76]
 - [ ] Task: Conductor - User Manual Verification 'Command & Scenarios' (Protocol in workflow.md) [checkpoint: ]
 
 ## Phase 3: Exam Tips & Polish

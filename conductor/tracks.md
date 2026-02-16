@@ -27,8 +27,4 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: 修复项目5中关于无线网络配置的补充手册缺失问题及文档层级优化**
 *Link: [./tracks/fix_project5_manuals_20260202/](./tracks/fix_project5_manuals_20260202/)*
 
----
-
-- [x] **Track: 项目2 深度补充：理论、命令与考试贴士**
-*Link: [./tracks/supplement_project2_details_20260216/](./tracks/supplement_project2_details_20260216/)*
 

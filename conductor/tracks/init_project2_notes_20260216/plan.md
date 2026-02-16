@@ -7,7 +7,7 @@
 - [ ] Task: Conductor - User Manual Verification 'Preparation' (Protocol in workflow.md) [checkpoint: ]
 
 ## Phase 2: Content Implementation
-- [ ] Task: 写入“一、学习目的与要求”章节
+- [~] Task: 写入“一、学习目的与要求”章节
 - [ ] Task: 写入“二、考核知识点与考核要求”章节
 - [ ] Task: 写入“三、本章重点、难点”章节
 - [ ] Task: 写入“四、实战演练（预留）”章节

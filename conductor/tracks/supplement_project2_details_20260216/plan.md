@@ -24,3 +24,11 @@
 - [x] Task: 补充 STP 端口状态与 BPDU 细节 [a0f4ed2]
 - [x] Task: 补充设备远程管理 (VTY/AAA) 配置 [a0f4ed2]
 - [ ] Task: Conductor - User Manual Verification 'Final Completion' (Protocol in workflow.md) [checkpoint: ]
+
+## Phase 5: Conceptual Deep-Dive (Advanced Explanations)
+- [x] Task: 深入详解 VLAN 的本质与逻辑隔离原理 [e4952ee]
+- [x] Task: 深入详解 Trunk 的封装与跨设备二层通信 [e4952ee]
+- [x] Task: 深入详解 STP 的“破环”数学逻辑 [e4952ee]
+- [x] Task: 深入详解三层交换的“转发平面”与“控制平面” [e4952ee]
+- [x] Task: 深入详解 VRRP 的状态同步与网关切换 [e4952ee]
+- [ ] Task: Conductor - User Manual Verification 'Conceptual Deep-Dive' (Protocol in workflow.md) [checkpoint: ]

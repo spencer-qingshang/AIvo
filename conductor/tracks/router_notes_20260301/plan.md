@@ -2,7 +2,7 @@
 
 ## Phase 1: 笔记框架搭建 (Foundation Phase)
 - [x] Task: 创建笔记文件 `路由器配置与路由协议笔记.md` 并搭建符合大纲的初步章节结构。 8e3abd8
-- [ ] Task: 制作全章逻辑脑图 (MarkMind) 展示核心考点联系。
+- [x] Task: 制作全章逻辑脑图 (MarkMind) 展示核心考点联系。 815084b
 - [ ] Task: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)
 
 ## Phase 2: 路由器基础与单臂路由内容填充 (Basic Configs)

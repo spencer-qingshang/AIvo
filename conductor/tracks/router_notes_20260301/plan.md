@@ -16,5 +16,5 @@
 
 ## Phase 4: 细节校对与验收 (Final Review)
 - [x] Task: 对所有 8 个知识点按“识记、领会、应用”进行完整性核查，确保无遗漏。
-- [ ] Task: 核查所有 CLI 命令块的排版准确性及图片占位符。
+- [x] Task: 核查所有 CLI 命令块的排版准确性及图片占位符。
 - [ ] Task: Conductor - User Manual Verification 'Phase 4' (Protocol in workflow.md)

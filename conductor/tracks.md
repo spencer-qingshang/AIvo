@@ -29,7 +29,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: 制作《交换与路由技术》的学习笔记，严格根据大纲要求。**
+- [x] **Track: 制作《交换与路由技术》的学习笔记，严格根据大纲要求。**
 *Link: [./tracks/router_notes_20260301/](./tracks/router_notes_20260301/)*
 
 

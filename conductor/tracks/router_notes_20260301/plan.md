@@ -14,7 +14,7 @@
 - [x] Task: 填充知识点 7-8：涵盖 RIPv2 定时器与版本区别、OSPF 单区域及骨干区域配置逻辑。 c01b496
 - [x] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md) 28b6b9e
 
-## Phase 4: 细节校对与验收 (Final Review)
+## Phase 4: 细节校对与验收 (Final Review) [checkpoint: 81f4549]
 - [x] Task: 对所有 8 个知识点按“识记、领会、应用”进行完整性核查，确保无遗漏。
 - [x] Task: 核查所有 CLI 命令块的排版准确性及图片占位符。
-- [ ] Task: Conductor - User Manual Verification 'Phase 4' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4' (Protocol in workflow.md) 81f4549

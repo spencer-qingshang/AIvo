@@ -10,7 +10,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md) c2da35d
 
 ## Phase 3: 路由协议进阶填充 (Routing Protocols)
-- [~] Task: 填充知识点 5-6：包含静态路由原理、默认路由及浮动路由（备份路径）的配置方案。
+- [x] Task: 填充知识点 5-6：包含静态路由原理、默认路由及浮动路由（备份路径）的配置方案。 f329a5f
 - [ ] Task: 填充知识点 7-8：涵盖 RIPv2 定时器与版本区别、OSPF 单区域及骨干区域配置逻辑。
 - [ ] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)
 

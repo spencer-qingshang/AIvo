@@ -6,7 +6,7 @@
 
 ## Phase 2: 路由器基础与单臂路由内容填充 (Basic Configs)
 - [x] Task: 填充知识点 1-2：包含 Console 登录、命令视图切换、模块端口识别及基本配置命令。 266c9d6
-- [ ] Task: 填充知识点 3-4：涵盖 DHCP 的两种方法（端口/全局地址池）、单臂路由及 ARP 广播。
+- [x] Task: 填充知识点 3-4：涵盖 DHCP 的两种方法（端口/全局地址池）、单臂路由及 ARP 广播。 855ae6a
 - [ ] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
 
 ## Phase 3: 路由协议进阶填充 (Routing Protocols)

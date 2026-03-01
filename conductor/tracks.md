@@ -29,7 +29,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: 参考项目2的单元卷，制作项目3（中型园区网络）的单元测试卷。**
+- [~] **Track: 参考项目2的单元卷，制作项目3（中型园区网络）的单元测试卷。**
 *Link: [./tracks/project3_exam_creation_20260301/](./tracks/project3_exam_creation_20260301/)*
 
 

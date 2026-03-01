@@ -13,7 +13,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md) dd573e7
 
 ## Phase 3: 答案编制与格式校对 (Answer Key & Formatting)
-- [~] Task: 编制所有题目的标准答案，并针对难题编写详细的逻辑解析。
-- [ ] Task: 按照项目 2 的视觉排版风格进行格式美化，确保 Markdown 渲染无误。
+- [x] Task: 编制所有题目的标准答案，并针对难题编写详细的逻辑解析。 d45068b
+- [~] Task: 按照项目 2 的视觉排版风格进行格式美化，确保 Markdown 渲染无误。
 - [ ] Task: 执行全卷自测，验证命令序列的正确性（模拟 eNSP 环境逻辑）。
 - [ ] Task: Conductor - User Manual Verification 'Phase 3' (Protocol in workflow.md)

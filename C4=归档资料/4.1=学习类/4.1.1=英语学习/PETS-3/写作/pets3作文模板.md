@@ -16,3 +16,5 @@ Exmaination
 Methods
 Revision
 Effcient
+Gratitude
+Farward

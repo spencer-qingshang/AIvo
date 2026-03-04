@@ -12,7 +12,7 @@ Thank you again for your help. It's my hope that you can accept my gratitude. I 
 
 
 Preparing
-Exmaination
+Examination
 Methods
 Revision
 Effcient

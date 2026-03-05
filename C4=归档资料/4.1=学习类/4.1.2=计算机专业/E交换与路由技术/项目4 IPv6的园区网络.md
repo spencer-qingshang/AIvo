@@ -1,254 +1,122 @@
-1. IPv6地址的基本配置
+# 项目4 IPv6的园区网络 (深度备考版)
 
-**识记：IPv6地址的优势；IPv6地址的报头结构。**
-*   **IPv6地址的优势**：
-    1.  **近乎无限的地址空间**：从32位增加到128位，彻底解决了IPv4地址枯竭的问题。
-    2.  **更精简的报头**：去掉了IPv4报头中不必要的字段，提高了路由器的处理效率。
-    3.  **内生安全性**：设计之初就考虑了安全，支持IPsec加密。
-    4.  **即插即用 (SLAAC)**：电脑联网后可以自动生成IPv6地址，不需要DHCP服务器也能上网。
-    5.  **更好的QoS支持**：新增了流标签字段，更方便处理语音、视频等实时流量。
-*   **IPv6报头结构**：采用40字节的固定长度。包含版本、流量类别、流标签、有效载荷长度、下一个报头、跳数限制、源地址和目的地址。
+## 一、 IPv6 核心优势与报头结构 (必考识记)
 
-**领会：IPv6与IPv4相比：地址长度、报文格式、安全性方面的区别；IPv6地址的记录格式。**
-*   **对比区别**：
-    *   **地址长度**：IPv4是32位（约43亿个），IPv6是128位（多到可以给地球上每颗沙子分IP）。
-    *   **报文格式**：IPv4报头长20-60字节且不固定，IPv6固定为40字节。IPv6取消了报头校验和，交给更高层处理，提升了速度。
-    *   **安全性**：IPv4安全是后来“补”上去的，IPv6是原生支持IPsec加密。
-*   **IPv6记录格式**：
-    *   采用 **十六进制** 表示，分为8组，每组4位。例如：`2001:0db8:85a3:0000:0000:8a2e:0370:7334`。
-    *   **压缩规则**：
-        1. 每组前面的`0`可以省略（如 `0db8` 写成 `db8`）。
-        2. 全是`0`的一组可以写成一个`0`。
-        3. 连续的全0组可以用 `::` 代替，但一个地址只能用一次 `::`。
+### 1.1 IPv6 相比 IPv4 的主要优势
+*   **无限地址空间**：从 32 位增加到 **128 位**，彻底解决地址枯竭问题。
+*   **报头精简**：固定报头长度为 **40 字节**，去除了校验和（Checksum）等冗余字段，提高路由器转发效率。
+*   **地址配置简单**：支持 **SLAAC (无状态地址自动配置)**，实现真正的“插拔即用”。
+*   **安全性增强**：内生支持 **IPsec**，提供端到端的安全保障。
+*   **QoS 优化**：新增 **流标签 (Flow Label)** 字段，更好地支持语音、视频等实时业务。
 
-**应用：在路由器不同端口间进行IPv6地址的配置。**
-*   华为设备命令核心：
-    1. 全局开启：`ipv6`
-    2. 进入接口：`ipv6 enable`
-    3. 配置地址：`ipv6 address 2001::1 64`
+### 1.2 IPv6 报头结构对比
+| 字段 | 作用 | 与 IPv4 区别 |
+| :--- | :--- | :--- |
+| **Version** | 版本号，固定为 6 | 对应 IPv4 的 Version (4) |
+| **Traffic Class** | 流量类别，用于 QoS | 对应 IPv4 的 ToS |
+| **Flow Label** | **流标签**，标识同一流 | **IPv6 新增**，用于快速处理 |
+| **Next Header** | 标识下一个扩展报头或上层协议 | 对应 IPv4 的 Protocol |
+| **Hop Limit** | 跳数限制 | 对应 IPv4 的 TTL |
 
+---
 
-2. 使用IPv6静态路由及默认路由实现网络连通
+## 二、 IPv6 地址记录与压缩规则 (必背基础)
 
-**识记：IPv6地址结构；IPv6地址类型；IPv6路由。**
-*   **IPv6地址结构**：前缀（网络部分）+ 接口标识（主机部分）。通常前缀长度为64位。
-*   **IPv6地址类型**：
-    1.  **单播 (Unicast)**：一对一通信。包含全球单播地址（2001::开头，相当于公网IP）和链路本地地址（FE80::开头，仅在本地链路有效）。
-    2.  **组播 (Multicast)**：一对多通信。FF::开头。
-    3.  **任播 (Anycast)**：一对一组中的最近者通信。
-    *   *注意：IPv6取消了广播，用组播代替。*
-*   **IPv6路由**：指导IPv6报文转发的表项，包含目的前缀、优先级、开销、下一跳和出接口。
+### 2.1 记录格式
+*   采用 **冒号十六进制** 表示，共 128 位，分为 8 组，每组 16 位。
+*   例如：`2001:0DB8:0000:0000:0001:0000:0000:0001`
 
-**领会：IPv6路由与IPv4路由的区别。**
-*   **路由表大小**：IPv6地址长，路由条目占用的空间比IPv4大。
-*   **邻居发现 (NDP)**：IPv6使用NDP协议替代了IPv4的ARP来解析MAC地址。
-*   **下一跳地址**：在IPv6静态路由中，下一跳通常建议使用对端的 **链路本地地址 (FE80::)**，因为这样即使全球地址变了，路由依然稳定。
+### 2.2 三大压缩规则 (考试必考)
+1.  **省略前导 0**：每组开头的 0 可以省略。如 `0DB8` -> `DB8`。
+2.  **全 0 组压缩**：一组全 0 可以简写为 1 个 `0`。
+3.  **双冒号压缩 (`::`)**：连续的多个全 0 组可以用 `::` 代替。
+    *   **注意**：一个地址中 `::` **只能出现一次**。
+*   **示例**：`2001:DB8::1:0:0:1`
 
-**应用：正确配置IPv6静态路由；正确配置IPv6默认路由；正确配置 IPv6汇总路由；能描述IPv6各类地址表达方式。**
-*   **静态路由**：`ipv6 route-static 2001:2:: 64 2001:12::2` (去2网段，走12::2这扇门)。
-*   **默认路由**：`ipv6 route-static :: 0 2001:12::2` (`:: 0` 代表所有目的地)。
-*   **汇总路由**：将多个连续的子网合并为一个更大的网段，减少路由表规模。
-*   **地址表达方式**：首选格式（全写）、压缩格式（省0）、内嵌IPv4格式。
+---
 
+## 三、 IPv6 地址类型 (核心分类)
 
-3. 使用动态路由RIPng协议实现网络连通
+| 类型 | 前缀/特征 | 说明 |
+| :--- | :--- | :--- |
+| **全球单播地址 (GUA)** | **2000::/3** | 相当于公网 IP，全球唯一。 |
+| **链路本地地址 (LLA)** | **FE80::/10** | **每个 IPv6 接口必备**，仅在同一链路上有效。 |
+| **唯一本地地址 (ULA)** | **FC00::/7** | 相当于私网 IP，内部使用。 |
+| **组播地址 (Multicast)** | **FF00::/8** | 一对多。**IPv6 取消了广播**，由组播替代。 |
+| **任播地址 (Anycast)** | 无固定前缀 | 一对一组中的“最近者”。 |
+| **环回地址** | **::1/128** | 相当于 IPv4 的 127.0.0.1。 |
 
-**识记：RIPng；RIPng工作机制；RIPng报文格式。**
-*   **RIPng**：RIP协议在IPv6环境下的升级版（Next Generation）。
-*   **RIPng工作机制**：
-    1.  **距离矢量**：以跳数作为唯一度量值（最大15跳，16跳不可达）。
-    2.  **UDP传输**：使用UDP端口 521。
-    3.  **组播更新**：目的地为组播地址 `FF02::9`。
-*   **RIPng报文格式**：由命令字段、版本号和多个RTE（路由项实体）组成。
+---
 
-**领会：掌握RIPng与RIPv2的区别；能区分RIPng与RIPv2配置命令的区别。**
-*   **主要区别**：
-    *   **地址族**：RIPv2跑在IPv4上，RIPng跑在IPv6上。
-    *   **下一跳**：RIPng使用对端的链路本地地址作为下一跳。
-    *   **启用方式**：RIPv2是在全局`network`宣告，**RIPng是在接口下直接使能**。
-*   **命令区别**：
-    *   RIPng配置：先全局进程 `ripng 1`，再进接口 `ripng 1 enable`。
+## 四、 IPv6 路由技术 (核心领会)
 
-4. 使用动态路由OSPFv3协议实现网络连通
+### 4.1 静态与默认路由
+*   配置逻辑与 IPv4 一致，但必须全局开启 `ipv6` 协议栈。
+*   **默认路由表示**：`::/0`。
+*   **汇总路由**：将具有相同前缀的多个子网合并，减小路由表规模。
 
-**识记：OSPFv3基本概念；OSPFv3的报文；OSPFv3的LSA类型；OSPFv3的定时器。**
-*   **OSPFv3基本概念**：基于链路状态的协议。运行在IPv6上，独立于网络层地址。
-*   **OSPFv3报文**：Hello、DD、LSR、LSU、LSAck（与v2类似，但报文头有细微变化）。
-*   **LSA类型 (核心变化)**：
-    *   1类和2类LSA：不再包含IP地址信息，只描述拓扑结构。
-    *   **8类 LSA (Link-LSA)**：宣告接口的链路本地地址。
-    *   **9类 LSA (Intra-Area-Prefix-LSA)**：宣告区域内的网段前缀。
-*   **OSPFv3定时器**：Hello时间（默认10s）、Dead时间（默认40s）。
+### 4.2 RIPng (Next Generation)
+*   **UDP 端口**：**521** (RIPv2 为 520)。
+*   **组播地址**：**FF02::9** (RIPv2 为 224.0.0.9)。
+*   **配置差异**：**在接口下直接使能**，不再使用全局 `network` 宣告。
+*   **下一跳**：使用邻居的 **链路本地地址 (Link-local)**。
 
-**领会：OSPFv3与OSFP的区别。**
-*   **Router ID**：OSPFv3依然使用一个32位的数字（类似IPv4地址格式）作为Router ID，必须手动配置。
-*   **认证方式**：OSPFv3删除了协议自身的认证，直接调用IPv6的IPsec安全机制。
-*   **多实例**：OSPFv3支持在同一条链路上运行多个实例（Instance ID）。
+### 4.3 OSPFv3 (Open Shortest Path First v3)
+*   **相同点**：SPF 算法、LSA 泛洪机制、区域划分（Area 0 为骨干）。
+*   **不同点**：
+    *   **基于链路运行**：而非网段。
+    *   **Router ID**：**必须手动配置**，依然采用 32 位点分十进制（如 1.1.1.1）。
+    *   **LSA 变化**：
+        *   **Type 8 (Link-LSA)**：宣告接口链路本地地址。
+        *   **Type 9 (Intra-Area-Prefix-LSA)**：宣告区域内前缀。
+    *   **配置方式**：在接口下直接使能 `ospfv3 1 area 0`。
 
-**应用：能正确配置OSPFv3路由协议；能灵活使用OSPFv3实现网络连通。**
-*   **配置核心**：
-    1. 配置 Router ID。
-    2. 全局开启 OSPFv3 进程。
-    3. **进接口绑定区域**：`ospfv3 1 area 0`。
+---
 
-5. IPv6园区网络实战全流程保姆级手册
+## 五、 关键配置命令 (华为 VRP 必会)
 
-> **实验说明**：本手册覆盖从基础IP配置到静态路由、动态路由（RIPng/OSPFv3）的所有步骤。
-> **核心原则**：**不跳步、不盲目、先保存、后验证**。
-
-### 阶段一：物理搭建与基础准备
-
-#### 1. 物理拓扑搭建
-在 eNSP 中按顺序摆放并连接设备，**不要使用 Auto 线缆**，请手动选择 `Copper`（黑色实线）：
-
-*   **R1 (AR2220)**：G0/0/1 连接 **PC1**；G0/0/0 连接 **R2**。
-*   **R2 (AR2220)**：G0/0/0 连接 **R1**；G0/0/1 连接 **R3**。
-*   **R3 (AR2220)**：G0/0/0 连接 **R2**；G0/0/1 连接 **PC2**。
-
-> **🔔 避坑点**：连线完成后，务必框选所有设备点击“开启”，等接口圆点全部变绿。
-
-### 阶段二：IPv6 基础地址配置（打地基）
-
-#### 1. 路由器 R1 配置
+### 1. 基础地址配置
 ```shell
-<Huawei> system-view
-[Huawei] sysname R1
-[R1] ipv6                                # 【必做】全局开启IPv6总开关
-[R1] interface GigabitEthernet 0/0/1      # 进入连接PC1的接口
-[R1-GigabitEthernet0/0/1] ipv6 enable    # 【必做】接口开启IPv6
-[R1-GigabitEthernet0/0/1] ipv6 address 2001:1::254 64 # 配置全球单播地址
-[R1-GigabitEthernet0/0/1] quit
-
-[R1] interface GigabitEthernet 0/0/0      # 进入连接R2的接口
-[R1-GigabitEthernet0/0/0] ipv6 enable    # 【必做】接口开启IPv6
-[R1-GigabitEthernet0/0/0] ipv6 address 2001:12::1 64
-[R1-GigabitEthernet0/0/0] quit
-[R1] save                                # 【建议】随手保存配置
+[Router] ipv6                             # 全局开启IPv6 (第一步！)
+[Router] interface GigabitEthernet 0/0/0
+[Router-G0/0/0] ipv6 enable              # 接口使能IPv6
+[Router-G0/0/0] ipv6 address 2001::1 64  # 配置全球单播地址
 ```
 
-#### 2. 路由器 R2 配置
+### 2. 静态与默认路由
 ```shell
-<Huawei> system-view
-[Huawei] sysname R2
-[R2] ipv6
-[R2] interface GigabitEthernet 0/0/0
-[R2-GigabitEthernet0/0/0] ipv6 enable
-[R2-GigabitEthernet0/0/0] ipv6 address 2001:12::2 64
-[R2-GigabitEthernet0/0/0] quit
+# 静态路由: 目的网络 掩码 下一跳
+[Router] ipv6 route-static 2002:: 64 2001::2
 
-[R2] interface GigabitEthernet 0/0/1
-[R2-GigabitEthernet0/0/1] ipv6 enable
-[R2-GigabitEthernet0/0/1] ipv6 address 2001:23::2 64
-[R2-GigabitEthernet0/0/1] quit
+# 默认路由
+[Router] ipv6 route-static :: 0 2001::2
 ```
 
-#### 3. 路由器 R3 配置
+### 3. RIPng 动态路由
 ```shell
-<Huawei> system-view
-[Huawei] sysname R3
-[R3] ipv6
-[R3] interface GigabitEthernet 0/0/0
-[R3-GigabitEthernet0/0/0] ipv6 enable
-[R3-GigabitEthernet0/0/0] ipv6 address 2001:23::3 64
-[R3-GigabitEthernet0/0/0] quit
-
-[R3] interface GigabitEthernet 0/0/1
-[R3-GigabitEthernet0/0/1] ipv6 enable
-[R3-GigabitEthernet0/0/1] ipv6 address 2001:2::254 64
-[R3-GigabitEthernet0/0/1] quit
+[Router] ripng 1                          # 开启进程
+[Router] interface GigabitEthernet 0/0/0
+[Router-G0/0/0] ripng 1 enable           # 接口下使能 (关键！)
 ```
 
-#### 4. PC 端配置
-*   **PC1**：
-    *   IPv6地址：`2001:1::1`
-    *   前缀长度：`64`
-    *   IPv6网关：`2001:1::254`
-*   **PC2**：
-    *   IPv6地址：`2001:2::1`
-    *   前缀长度：`64`
-    *   IPv6网关：`2001:2::254`
-*   **⚠️ 动作**：点击 PC 配置界面的“应用”按钮！
-
-#### 🔍 检查点 1（必须成功）：
-在 R1 上输入 `display ipv6 interface brief`，确保物理口和协议口都是 **Up**。
-在 PC1 上 `ping 2001:1::254`，如果通了，说明基础配置没问题。
-
-### 阶段三：IPv6 静态路由配置（手动指路）
-
-> **目标**：让 PC1 能 ping 通 PC2。
-
-#### 1. R1 配置（指明去广州的方向）
+### 4. OSPFv3 动态路由
 ```shell
-[R1] ipv6 route-static 2001:2:: 64 2001:12::2
-# 含义：要去2001:2::/64网段，请从G0/0/0出去交给2001:12::2（R2）
+[Router] ospfv3 1
+[Router-ospfv3-1] router-id 1.1.1.1      # 必须手动指定身份证
+[Router] interface GigabitEthernet 0/0/0
+[Router-G0/0/0] ospfv3 1 area 0          # 接口下使能并划分区域
 ```
 
-#### 2. R2 配置（中间商，指两头）
-```shell
-[R2] ipv6 route-static 2001:1:: 64 2001:12::1  # 回北京的方向
-[R2] ipv6 route-static 2001:2:: 64 2001:23::3  # 去广州的方向
-```
+---
 
-#### 3. R3 配置（指明回北京的方向）
-```shell
-[R3] ipv6 route-static 2001:1:: 64 2001:23::2
-```
+## 六、 考纲重点提炼：哪些必须背？
 
-#### 🔍 检查点 2（必须成功）：
-在 PC1 上 `ping 2001:2::1`。如果不通，**检查 R3 是否漏配了回程路由**。
-
-### 阶段四：动态路由 RIPng 实战（自动寻路 1）
-
-#### 0. 清除静态路由（实验要求）
-为了验证动态路由，请在 R1/R2/R3 上执行 `undo ipv6 route-static ...` 删除刚才配的路。
-
-#### 1. 全局与接口配置（以 R1 为例，R2/R3 同理）
-```shell
-# R1
-[R1] ripng 1                     # 1. 开启进程
-[R1-ripng-1] quit
-[R1] interface GigabitEthernet 0/0/0
-[R1-GigabitEthernet0/0/0] ripng 1 enable   # 2. 接口开启使能
-[R1] interface GigabitEthernet 0/0/1
-[R1-GigabitEthernet0/0/1] ripng 1 enable
-
-# R2/R3 重复上述操作：1.全局启动进程 2.所有IPv6接口下使能ripng 1
-```
-
-### 阶段五：动态路由 OSPFv3 实战（企业级自动寻路）
-
-#### 0. 清除 RIPng 配置
-```shell
-[R1] undo ripng 1
-[R2] undo ripng 1
-[R3] undo ripng 1
-```
-
-#### 1. R1 关键配置（注意 Router ID）
-```shell
-[R1] ospfv3 1                    # 启动进程
-[R1-ospfv3-1] router-id 1.1.1.1  # 【必配】身份证号，不配起不来！
-[R1-ospfv3-1] quit
-[R1] interface GigabitEthernet 0/0/0
-[R1-GigabitEthernet0/0/0] ospfv3 1 area 0   # 接口绑定区域
-[R1] interface GigabitEthernet 0/0/1
-[R1-GigabitEthernet0/0/1] ospfv3 1 area 0
-```
-
-#### 2. R2/R3 关键配置
-*   **R2**：`router-id 2.2.2.2`，接口下 `ospfv3 1 area 0`。
-*   **R3**：`router-id 3.3.3.3`，接口下 `ospfv3 1 area 0`。
-
-#### 🔍 最终检查点：
-1.  在 R1 输入 `display ospfv3 peer`，状态必须显示 **Full**。
-2.  在 R1 输入 `display ipv6 routing-table protocol ospfv3`，确认学到了 2.0 网段。
-3.  PC1 ping PC2 成功。
-
-### 💡 总结：为什么你会 ping 不通？（排错 Checklist）
-
-1.  **忘开总开关**：全局漏了 `ipv6` 或者是 `ospfv3 1`。
-2.  **忘激活接口**：接口下漏了 `ipv6 enable`。
-3.  **忘了回程路由**：静态路由只配了去程，PC2 回不来。
-4.  **忘了 Router-ID**：OSPFv3 如果不手动配 Router ID，邻居永远是 Down 的。
-5.  **忘了使能动态协议**：动态协议（RIPng/OSPFv3）必须进入**每个接口**（包括连 PC 的那个网关接口）手动敲 `enable` 或 `area 0`。
-6.  **忘了点“应用”**：eNSP 里的 PC 配置，不点应用相当于没配。
+1.  **IPv6 报头长度**：固定为 **40 字节**。
+2.  **地址位宽**：**128 位**。
+3.  **压缩规则**：双冒号 `::` 只能用一次。
+4.  **组播取代广播**：IPv6 没有广播，地址以 `FF` 开头。
+5.  **链路本地地址 (LLA)**：前缀是 `FE80::/10`，用于同一链路内的邻居发现和路由协议建立。
+6.  **NDP (邻居发现协议)**：取代了 ARP，基于 ICMPv6 实现地址解析。
+7.  **OSPFv3 身份证**：Router ID 必须手动配置，且格式是 32 位（点分十进制）。
+8.  **动态协议配置位置**：RIPng 和 OSPFv3 都是在 **接口视图下使能**，而不是在全局视图宣告网段。
+9.  **故障排错首选命令**：`display ipv6 interface brief` (查接口)、`display ipv6 routing-table` (查路由)。

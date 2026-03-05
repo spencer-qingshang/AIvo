@@ -34,7 +34,10 @@ Dear Michael
 **我写这封邮件是为了邀请你参加一个小型欢送会，因为你即将出国留学。**
 I'm writting this email to invite you to a samll farewell party, because you are about to study abroad.
 **聚会将于本周日晚上7:00到11:00在我的别墅举行。届时，其他一些亲密的朋友也会和我们一起为你送上最美好的祝愿。此外，我们也很想多了解一些你未来学习的计划和目标。**
-In fact, the party will be held at my villa this Sunday from 7:00 p.m. to 8:00 p.m. At the same time, same other close friends will also be to wish you the best. In addition, we would to 
+In fact, the party will be held at my villa this Sunday from 7:00 p.m. to 8:00 p.m. At the same time, same other close friends will also be to wish you the best. In addition, we would to know more about your plan and goals for the future study.
 **希望你能接受我的邀请，和我们共度一段美好的时光。期待你的回复。**
-
+It is my hope that you can accept my invitation and have a great time with us. I look forward to hearing from you.
 **祝好，王林**
+Yours,
+Wang lin
+

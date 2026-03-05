@@ -17,9 +17,9 @@ Wang lin
 **尊敬的先生或女士：**
 Dear Sir or Madom,
 **我写这封信是为了申请校园图书馆助理的兼职职位，因为我对这份工作非常感兴趣。**
-I am writting this letter
+I am writting this letter to apply for a part-time position as campus library assistant, since I am very interested in this job.
 **首先，作为一名学生，我热爱书籍，并且对安静的环境有着极大的热情。此外，我是一个细心且负责任的人，这将使我能够有效地处理图书馆的工作。**
-
+In fact, it is my belief that I am qualified for this position.
 **我希望您能考虑我的申请，并给我一个面试的机会。期待收到您的回信。**
 
 **您诚挚的，王林**
